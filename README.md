@@ -1,7 +1,5 @@
 # Wanchain Explorer (In Progress)
 
-![EthExplorer Screenshot](http://i.imgur.com/NHFYq0x.png)
-
 ##License
 
 GPL (see LICENSE)

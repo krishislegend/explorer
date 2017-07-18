@@ -1,4 +1,4 @@
-# EthExplorer (In Progress)
+# Wanchain Explorer (In Progress)
 
 ![EthExplorer Screenshot](http://i.imgur.com/NHFYq0x.png)
 
@@ -6,9 +6,21 @@
 
 GPL (see LICENSE)
 
-##Installation
 
+##Installation (Test under ubuntu 14.04)
+Install Docker 
 Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git "Git installation") if you haven't already
+
+###start a wanchain node for test explorer
+Clone the repo
+`git clone https://github.com/wanchain/wanchain.git`
+`cd wanchain`
+`sudo ./release_mkimg.sh`
+`sudo docker run -it -p 8545:8545 wanchainrelease /bin/sh `
+
+In docker container:
+`geth --verbosity 5 --datadir /wanchain/data --etherbase '0x2d0e7c0813a51d3bd1d08246af2a8a7a57d8922e' --networkid 5201314 --mine --minerthreads 1 --nodiscover --rpc --rpcaddr 0
+.0.0.0 --rpccorsdomain "http://localhost:8000"`
 
 Clone the repo
 
@@ -20,10 +32,4 @@ Start the program. All dependencies will be automatically downloaded
 
 `npm start`
 
-Then visit http://localhost:8000 in your browser of choice. You might get an error message:
-
-`geth --rpc --rpccorsdomain "http://localhost:8000"`
-
-Install [geth](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum "Geth install") if you don't already have it, then run the above command.
-
-Then refresh the page in your browser 
+Then visit http://localhost:8000 in your browser of choice.

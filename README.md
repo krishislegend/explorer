@@ -21,8 +21,7 @@ Clone the repo
 
 In docker container:
 
-`geth --verbosity 5 --datadir /wanchain/data --etherbase '0x2d0e7c0813a51d3bd1d08246af2a8a7a57d8922e' --networkid 5201314 --mine --minerthreads 1 --nodiscover --rpc --rpcaddr 0
-.0.0.0 --rpccorsdomain "http://localhost:8000"`
+`geth --verbosity 5 --datadir /wanchain/data --etherbase '0x2d0e7c0813a51d3bd1d08246af2a8a7a57d8922e' --networkid 5201314 --mine --minerthreads 1 --nodiscover --rpc --rpcaddr 0.0.0.0 --rpccorsdomain "http://localhost:8000"`
 
 Clone the repo
 

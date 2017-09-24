@@ -91,14 +91,23 @@ angular.module('ethExplorer')
           for (var blockIdx = 0; blockIdx < txCount; blockIdx++) {
             web3.eth.getTransactionFromBlock($scope.blockId, blockIdx, function(error, result) {
 
+	      // JGu: from web3 - boolean result.trans_priv_type
+	      var sim_trans_priv_type = Math.random() < 0.5 ? true:false;
+	      var transaction_type_str = sim_trans_priv_type ? "(private transaction)" : "";
+	      var transaction_from = sim_trans_priv_type ? "address list" : result.from;
+	      //var addressUrl = "./#/address/" + transaction_from;
+              var addressUrl = sim_trans_priv_type ? "./#/addressList/"+result.hash : "./#/address/"+result.from;
+
               var transaction = {
                 id: result.hash,
                 hash: result.hash,
-                from: result.from,
+                from_address_url: addressUrl,
+                from: transaction_from,
                 to: result.to,
                 gas: result.gas,
                 input: result.input,
-                value: result.value
+                value: result.value,
+		typestr: transaction_type_str
               }
               $scope.$apply(
                 $scope.transactions.push(transaction)

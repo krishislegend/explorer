@@ -21,6 +21,11 @@ angular.module('ethExplorer', ['ngRoute','ui.bootstrap'])
                 templateUrl: 'views/addressInfo.html',
                 controller: 'addressInfoCtrl'
             }).
+	  //JGu: add html/controller for address list
+	    when('/addressList/:transactionId', {
+	        templateUrl: 'views/addressList.html',
+                controller: 'addressListCtrl'
+	    }).
             otherwise({
                 redirectTo: '/'
             });

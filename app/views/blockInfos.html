@@ -75,7 +75,7 @@
       <table class="table table-striped">
           <tbody>
           <tr>
-              <th colspan="2" style="text-align:left">Transaction #{{$index+1}}</th>
+              <th colspan="2" style="text-align:left">Transaction #{{$index+1}} {{tx.typestr}}</th>
           </tr>
           <tr>
               <td>Hash #</td>
@@ -83,7 +83,11 @@
           </tr>
           <tr>
               <td>From</td>
+	      <td><a href={{tx.from_address_url}}>{{tx.from}}</a></td>
+<!---
+              JGu: this is a dynamic link to transaction-from address or address-list
               <td><a href="./#/address/{{tx.from}}">{{tx.from}}</a></td>
+--->
           </tr>
           <tr>
               <td>To</td>

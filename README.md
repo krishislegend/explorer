@@ -1,36 +1,52 @@
 # Wanchain Explorer (In Progress)
 
-##License
+## License
 
 GPL (see LICENSE)
 
-
-##Installation (Test under ubuntu 14.04)
-Install Docker 
+## Installation (Test under ubuntu 16.04LTS)
 Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git "Git installation") if you haven't already
 
-###start a wanchain node for test explorer
+### Build a wanchain node for test explorer
 Clone the repo
-`git clone https://github.com/wanchain/wanchain.git`
+git clone https://github.com/wanchain/go-wanchain.git
 
-`cd wanchain`
+Following the instruction under go-wanchain
+Build the go_wanchain executable using CLI or Gogland
 
-`sudo ./release_mkimg.sh`
-
-`sudo docker run -it -p 8545:8545 wanchainrelease /bin/sh `
-
-In docker container:
-
-`geth --verbosity 5 --datadir /wanchain/data --etherbase '0x2d0e7c0813a51d3bd1d08246af2a8a7a57d8922e' --networkid 5201314 --mine --minerthreads 1 --nodiscover --rpc --rpcaddr 0.0.0.0 --rpccorsdomain "http://localhost:8000"`
-
-Clone the repo
-
-`git clone https://github.com/etherparty/explorer`
-
+### Prepare wanchain explorer
 Download [Nodejs and npm](https://docs.npmjs.com/getting-started/installing-node "Nodejs install") if you don't have them
 
-Start the program. All dependencies will be automatically downloaded
+Clone the repo
+git clone https://github.com/wanchain/explorer.git
 
-`npm start`
+### Run in local mode
+### i.e. node.js web server, go_wanchain node server, and brower all run on the same host machine
+
+Start the go_wanchain node
+go_wanchain --datadir ./data --networkid 5201314 --mine --minerthreads 1 --nodiscover --rpc --rpcaddr 0.0.0.0 --rpcapi eth,personal,net,admin --rpccorsdomain "http://localhost:8000"
+
+Start the explorer program. All dependencies will be automatically downloaded
+cd wanchain/explorer
+npm start
 
 Then visit http://localhost:8000 in your browser of choice.
+
+### Run in remote mode
+### i.e. node.js web server, and go_wanchain node server run on the same host machine. But brower accesses the webpage from another host machine
+
+cd wanchain/explorer/app
+edit app.js
+  uncomment this line
+    var eth_node_url = new URL(eth_node_url_string);        // for remote host mode
+  comment this
+    //var eth_node_url = 'http://localhost:8545';           // for local host mode
+
+Start the go_wanchain node on host 192.168.x.y		    // check your host IP address. rpccorsdomain setting is important
+go_wanchain --datadir ./data --networkid 5201314 --mine --minerthreads 1 --nodiscover --rpc --rpcaddr 0.0.0.0 --rpcapi eth,personal,net,admin --rpccorsdomain "http://192.168.x.y:8000"
+
+Start the explorer program on same host 192.168.x.y
+cd wanchain/explorer
+npm start
+
+Then visit http://192.168.x.y:8000 in your browser of choice from another host machine that has network access to 192.168.x.y  

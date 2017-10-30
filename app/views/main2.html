@@ -1,0 +1,32 @@
+<div class="container" style="padding-top: 50px;">
+
+    <h1 style="text-align:center;">List of WanCoin Blocks</h1>
+
+    <h4 style="text-align:left; margin-top: 30px;">
+      <a href="/#/block/{{lastBlockNum}}">Latest Block: {{lastBlockNum}}</a>
+      <form  name="blockList_form" ng-controller="mainCtrl2" ng-submit="processBlockListRequest()" class="navbar-form navbar-right">
+            <div class="form-group">
+            <input type="text" placeholder="{{blockNum}}" name="requestType" required  ng-model="blockListRequest"  class="form-control"> <br>
+            </div>
+            <button type="submit" class="btn btn-success"> List </button></form>
+    </h4>
+
+    <table class="table table-striped" cellpadding="0" cellspacing="0" style="padding:0px;float:left;margin:0px;width:100%" ng-controller="mainCtrl2">
+      <tbody>
+	<tr>
+	  <th>Block #</th>
+	  <th>Tx #</th>
+ 	  <th>Size</th>
+	  <th>Timestamp</th>
+	</tr>
+	<tr data-ng-repeat="i in blocks">
+	  <td><a href="/#/block/{{i.number}}">{{i.number}}</a></td>
+	  <td>{{i.transactions.length}}</td>
+	  <td>{{i.size}}</td>
+	  <td>{{i.timestamp}}</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+</div>

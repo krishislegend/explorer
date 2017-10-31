@@ -2,11 +2,16 @@
 
     <h1 style="text-align:center;">List of WanCoin Blocks</h1>
 
-    <h4 style="text-align:center; margin-top: 30px;">
-      <a href="/#/block/{{blockNum}}">Latest Block: {{blockNum}}</a>
+    <h4 style="text-align:left; margin-top: 30px;">
+      <a href="/#/block/{{lastBlockNum}}">Latest Block: {{lastBlockNum}}</a>
+      <form  name="blockList_form" ng-controller="mainCtrl" ng-submit="processBlockListRequest()" class="navbar-form navbar-right">
+            <div class="form-group">
+            <input type="text" placeholder="{{blockNum}}" name="requestType" required  ng-model="blockListRequest"  class="form-control"> <br>
+            </div>
+            <button type="submit" class="btn btn-success"> List </button></form>
     </h4>
 
-    <table class="table table-striped" cellpadding="0" cellspacing="0" style="padding:0px;float:left;margin:0px;width:100%">
+    <table class="table table-striped" cellpadding="0" cellspacing="0" style="padding:0px;float:left;margin:0px;width:100%" ng-controller="mainCtrl">
       <tbody>
 	<tr>
 	  <th>Block #</th>

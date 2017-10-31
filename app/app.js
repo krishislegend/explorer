@@ -9,6 +9,10 @@ angular.module('ethExplorer', ['ngRoute','ui.bootstrap'])
                 templateUrl: 'views/main.html',
                 controller: 'mainCtrl'
             }).
+	    when('/:blockListId', {
+		templateUrl: 'views/main2.html',
+                controller: 'mainCtrl2'
+	    }).
             when('/block/:blockId', {
                 templateUrl: 'views/blockInfos.html',
                 controller: 'blockInfosCtrl'

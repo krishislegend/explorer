@@ -1,19 +1,31 @@
 angular.module('ethExplorer')
-    .controller('mainCtrl', function ($rootScope, $scope, $location) {
+  .controller('mainCtrl', function ($rootScope, $scope, $location) {
 
 	var web3 = $rootScope.web3;
-	var maxBlocks = 100; // TODO: into setting file or user select
-	var blockNum = $scope.blockNum = parseInt(web3.eth.blockNumber, 10);
-	if (maxBlocks > blockNum) {
-	    maxBlocks = blockNum + 1;
-	}
+	var blockNum;
 
-	// get latest 50 blocks
-	$scope.blocks = [];
-	for (var i = 0; i < maxBlocks; ++i) {
+	$scope.init = function() {
+	  var maxBlocks = 50;
+	  $scope.lastBlockNum = parseInt(web3.eth.blockNumber, 10);
+	  $scope.blockNum = $scope.lastBlockNum;
+
+	  blockNum = $scope.blockNum;
+	  if (maxBlocks > blockNum) {
+	    maxBlocks = blockNum + 1;
+	  }
+
+	  // get latest 50 blocks
+	  $scope.blocks = [];
+	  for (var i = 0; i < maxBlocks; ++i) {
 	    $scope.blocks.push(web3.eth.getBlock(blockNum - i));
-	}
+	  }  
+	};
 	
+	$scope.processBlockListRequest = function() {
+	  blockNum = $scope.blockNum = parseInt($scope.blockListRequest, 10);
+	  return $location.path('/'+blockNum);
+	};
+
         $scope.processRequest = function() {
              var requestStr = $scope.ethRequest.split('0x').join('');
 
@@ -30,7 +42,6 @@ angular.module('ethExplorer')
             alert('Don\'t know how to handle '+ requestStr)
         };
 
-
         function goToBlockInfos(requestStr) {
             $location.path('/block/'+requestStr);
         }
@@ -39,8 +50,9 @@ angular.module('ethExplorer')
             $location.path('/address/'+requestStr);
         }
 
-         function goToTxInfos (requestStr) {
+	function goToTxInfos (requestStr) {
              $location.path('/transaction/'+requestStr);
         }
 
+	$scope.init();
     });

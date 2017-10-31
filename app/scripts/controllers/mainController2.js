@@ -2,12 +2,12 @@ angular.module('ethExplorer')
   .controller('mainCtrl2', function ($rootScope, $scope, $location, $routeParams) {
 
 	var web3 = $rootScope.web3;
-	var maxBlocks = 50;
 	var blockNum;
 
 	$scope.init = function() {
+	  var maxBlocks = 50;
 	  $scope.lastBlockNum = parseInt(web3.eth.blockNumber, 10);
-	  $scope.blockNum = $routeParams.blockListId;
+	  $scope.blockNum = parseInt($routeParams.blockListId, 10);
 
 	  blockNum = $scope.blockNum;
 	  if (maxBlocks > blockNum) {

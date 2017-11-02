@@ -26,7 +26,7 @@ Clone the repo
 Start the go_wanchain node
 'go_wanchain --datadir ./data --networkid 5201314 --mine --minerthreads 1 --nodiscover --rpc --rpcaddr 0.0.0.0 --rpcapi eth,personal,net,admin --rpccorsdomain "http://localhost:8000"'
 
-Start the explorer program. All dependencies will be automatically downloaded
+Start explorer program. All dependencies will be automatically downloaded.
 'cd wanchain/explorer'
 'npm start'
 
@@ -49,7 +49,7 @@ edit app.js
 Start the go_wanchain node on host 192.168.x.y		    // check your host IP address. rpccorsdomain setting is important
 'go_wanchain --datadir ./data --networkid 5201314 --mine --minerthreads 1 --nodiscover --rpc --rpcaddr 0.0.0.0 --rpcapi eth,personal,net,admin --rpccorsdomain "http://192.168.x.y:8000"'
 
-Start the explorer program on same host 192.168.x.y
+Start explorer program on the same host 192.168.x.y.
 'cd wanchain/explorer'
 'npm start'
 

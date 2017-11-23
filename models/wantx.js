@@ -46,8 +46,6 @@ var WanTxSchema = new Schema({
         type: Number,
         default: 0
     },
-}, {
-    id: false
-});
+    },{id: false});
 
 module.exports = mongoose.model('Wantx', WanTxSchema);

@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var web3Router = require('./web3Router');
-const Wanblock = require('../../models/wanblock');
-const Wantx = require('../../models/wantx');
-const Wanaddress = require('../../models/wanaddress');
-const bc={
+const Wanblock = require('../models/wanblock');
+const Wantx = require('../models/wantx');
+const Wanaddress = require('../models/wanaddress');
+const bc = {
   breadcrumbs: {
     "BLOCKS": "/"
   }
@@ -13,11 +13,12 @@ const bc={
 router.get('/', (req, res, next) => {
   let response = res,
     obj;
-  if(Wanblock.collection.conn._readyState!==1){
+  //if cannot connect to DB,try to get data by web3
+  if (Wanblock.collection.conn._readyState !== 1) {
     next();
   };
   Wanblock.find({}, (err, result, res) => {
-    if (err||result.length===0) {
+    if (err || result.length === 0) {
       return console.log(err);
     }
     obj = require('../api/db/getData').listData(result);
@@ -26,7 +27,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/block/:blockNum', (req, res, next) => {
-  if(Wanblock.collection.conn._readyState!==1){
+  if (Wanblock.collection.conn._readyState !== 1) {
     next();
   };
   let response = res,
@@ -36,7 +37,7 @@ router.get('/block/:blockNum', (req, res, next) => {
   Wanblock.find({
     number: request
   }, (err, result, res) => {
-    if (err || result.length===0) {
+    if (err || result.length === 0) {
       response.render('error', bc);
       return console.log(err);
     }
@@ -56,7 +57,7 @@ router.get('/block/:blockNum', (req, res, next) => {
 });
 
 router.get('/block/addr/:addrHash', (req, res, next) => {
-  if(Wanblock.collection.conn._readyState!==1){
+  if (Wanblock.collection.conn._readyState !== 1) {
     next();
   };
   let response = res;
@@ -65,7 +66,7 @@ router.get('/block/addr/:addrHash', (req, res, next) => {
   Wanaddress.find({
     a_id: req.params.addrHash
   }, (err, result, res) => {
-    if (err||result.length === 0){
+    if (err || result.length === 0) {
       response.render('error', bc);
       return console.log(err);
     }
@@ -78,7 +79,7 @@ router.get('/block/addr/:addrHash', (req, res, next) => {
         $in: txh
       }
     }, (err, result, res) => {
-      if (err||result.length === 0){
+      if (err || result.length === 0) {
         response.render('error', bc);
         return console.log(err);
       }
@@ -89,7 +90,7 @@ router.get('/block/addr/:addrHash', (req, res, next) => {
 });
 
 router.get('/block/trans/:transHash', (req, res, next) => {
-  if(Wanblock.collection.conn._readyState!==1){
+  if (Wanblock.collection.conn._readyState !== 1) {
     next();
   };
   let response = res,
@@ -97,7 +98,7 @@ router.get('/block/trans/:transHash', (req, res, next) => {
   Wantx.find({
     hash: req.params.transHash
   }, (err, result, res) => {
-    if (err||result.length === 0){
+    if (err || result.length === 0) {
       response.render('error', bc);
       return console.log(err);
     }
@@ -106,5 +107,5 @@ router.get('/block/trans/:transHash', (req, res, next) => {
   });
 });
 
-router.use('/',web3Router);
+router.use('/', web3Router);
 module.exports = router;

@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var web3Router = require('./web3Router');
 var dbRouter = require('./dbRouter');
 const Wanblock = require('../models/wanblock');
 const options = {

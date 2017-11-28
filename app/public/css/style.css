@@ -33,12 +33,12 @@ input{ outline: none;}
 .com-title li{ float: left; margin-right: 15px; font-size: 16px; font-weight: 500;}
 .ico-img{ width:18px; height: 18px;}
 /*table*/
-.cont-box .blocklist{ box-shadow: 0px 3px 8px 0px rgba(15, 104, 170, 0.06); border-radius: 4px;}
+.cont-box .blocklist{box-shadow: 0px 3px 8px 0px rgba(15, 104, 170, 0.06); border-radius: 4px;}
 .com-table{width: 100%; padding: 20px; text-align: center; background: #fff;}
 .com-table tr:nth-child(even) td { background: #f7f8fc;}
 .com-table tr th{ height: 40px; font-size: 14px; background: #f7f8fc; border: none；}
 .com-table tr td{ height: 40px; border: none；}
-.blockInfo-box{box-shadow: 0px 3px 8px 0px rgba(15, 104, 170, 0.06); border-radius: 4px; background: #fff; margin-bottom: 20px;}
+.blockInfo-box{height:800px;box-shadow: 0px 3px 8px 0px rgba(15, 104, 170, 0.06); border-radius: 4px; background: #fff; margin-bottom: 20px;}
 .blockInfo-table{width: 100%; padding: 20px; text-align: left; background: #fff;}
 .blockInfo-title{ margin:20px 0 0 20px; font-size: 16px; font-weight: 600; text-align: left; padding-left: 15px; border-left: 2px solid #4b90f7;}
 .blockInfo-table tr:nth-child(odd) td { background: #f7f8fc;}
@@ -49,11 +49,10 @@ input{ outline: none;}
 ul.title{ padding-left:24px; }
 ul.title>li{ color:#4b90f7; font-size:26px; }
 a[href^="javascript"]{ cursor: default; color:#929cb8; }
-.titleAddr{ display: inline-block;}
+.titleAddr{ display: inline-block; margin-right: 10px;}
 .titleAddr li{ float: left; font-size: 14px; margin-right: 15px;}
-.ico-y{ width: 4px; height: 4px; line-height: 14px; margin: 5px 5px 0 0; background-color: #4b90f7; border-radius: 100%;}
-.addr-tit{ font-weight: 600; font-size: 14px;}
-.addr-mess{color: #929cb8; font-size: 14px;}
+.addr-tit{ font-weight: 600; font-size: 18px;margin-right:8px;}
+.addr-mess{color: #929cb8; font-size: 18px;vertical-align:bottom;}
 /*404*/
 .err_text{width: 769px; height: 257px; position: fixed; top: 50%; left: 50%; margin-top: -128px; margin-left: -384px; background-color: #ffffff; box-shadow: 0px 12px 20px 0px rgba(15, 104, 170, 0.06); border-radius: 20px; opacity: 0.9;}
 .errorDl{ width: 550px; height: 150px; margin: 0 auto; margin-top: 52px;}
@@ -62,3 +61,23 @@ a[href^="javascript"]{ cursor: default; color:#929cb8; }
 .err_h1{letter-spacing: 8px; font-size: 90px; color: #3f454c;}
 .err_p{color: #929cb8; font-size: 14px; margin-top: px;}
 .err_a{ font-size: 12px; color: #1992fc!important;}
+/*pagination in addressInfo*/
+.pagination{margin:30px auto;width:480px;}
+.pagination>.pageInfo{height: 26px;width:180px;margin-left:2%;float:left;line-height: 26px;text-align: center;border: solid 1px #d2e3f1;background-color: #f7f8fc;border-radius: 15px;color:#929cb8}
+.first{float:left;margin-right:5px;width:60px;height:26px;border: solid 1px #4b90f7;line-height: 26px;text-align: center;cursor: pointer;color:#4b90f7}
+.last{float:right;margin-right:5px;width:60px;height:26px;border: solid 1px #4b90f7;line-height: 26px;text-align: center;cursor: pointer;color:#4b90f7}
+.first:hover{background-color: #4b90f7;color:#fff;}
+.last:hover{background-color: #4b90f7;color:#fff;}
+.balCont{ width: 98%; margin:20px 0 0 20px; display: inline-block;}
+.balanceBox{height: 45px; padding:5px 30px 5px 7px;; background-image: linear-gradient(135deg, #1189f8 0%, #00c6ff 100%); border-radius: 8px;}
+.balDt{ width: 39px; height: 45px;}
+.balDd{ margin-left: -6px;}
+.balImg{ width: 100%;}
+.banNum{ font-size: 24px; color: #fff;}
+.banTex{ font-size: 12px; color: #fff;}
+.balMes{ width: 115px; margin-top: 10px;text-align: center; margin-left: 20px;}
+.balIco{ width: 5px; height: 6px; margin: -4px 10px 0 10px; vertical-align: middle;}
+.balNum2{color: #3f454c; font-size: 18px;}
+.balTex2{color: #929cb8; font-size: 12px;}
+.tabIn{	width: 45px; height: 20px; line-height: 20px; font-size: 12px; display: inline-block; color: #ffffff; background-color: #1993fd; border-radius: 10px;}
+.tabOut{	width: 45px; height: 20px; line-height: 20px; font-size: 12px; display: inline-block; color: #ffffff; background-color: #ff750f; border-radius: 10px;}

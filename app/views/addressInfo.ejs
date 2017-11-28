@@ -13,23 +13,27 @@
   </li>
 </ul>
 <article class="blockInfo-box">
-  <ul class="titleAddr">
-    <li>
-      <em class="floatLeft ico-y"></em>
-      <span class="floatLeft addr-tit">Address:<%=addrTitle.address%></span>
-      <span class="addr-mess"></span>
-    </li>
-    <li>
-      <em class="floatLeft ico-y"></em>
-      <span class="floatLeft addr-tit">WAN balance:<%=addrTitle["wan balance"]%></span>
-      <span class="addr-mess"></span>
-    </li>
-    <li>
-      <em class="floatLeft ico-y"></em>
-      <span class="floatLeft addr-tit">No of Transactions:<%=addrTitle["no of trans"]%></span>
-      <span class="addr-mess"></span>
-    </li>
-  </ul>
+  <div class="balCont">
+    <dl class="floatLeft balanceBox">
+      <dt class="balDt floatLeft">
+        <img src="/img/balanceImg.png" class="balImg" alt="">
+      </dt>
+      <dd class="balDd floatLeft">
+        <p class="banNum"><%=addrTitle["wan balance"]%></p>
+        <p class="banTex">WAN balance</p>
+      </dd>
+    </dl>
+    <div class="balMes floatLeft">
+      <p class="balNum2"><span><img src="/img/balIco.png" class="balIco" alt=""></span><%=addrTitle["no of trans"]%></p>
+      <p class="balTex2">No of Transactions</p>
+    </div>
+    <ul class="titleAddr floatRight">
+      <li>
+        <span class="floatLeft addr-tit">Address :</span>
+        <span class="addr-mess"><%=addrTitle.address%></span>
+      </li>
+    </ul>
+  </div>
   <table class="com-table" border="0" cellspacing="0" cellpadding="0">
     <thead>
       <tr>
@@ -38,6 +42,7 @@
         <th>Age</th>
         <th>Block</th>
         <th>From</th>
+        <th></th>
         <th>To</th>
         <th>Value</th>
         <th>Type</th>
@@ -51,6 +56,7 @@
           <td><%=transactionData[i].age%></td>
           <td><%=transactionData[i].block%></td>
           <td><a href="/block/addr/<%= transactionData[i].from %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].from.substr(0,18)+'...'%></a></td>
+          <td><span class="tabIn">IN</span></td>
           <td><a href="/block/addr/<%= transactionData[i].to %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].to.substr(0,18)+'...'%></a></td>
           <td><%=transactionData[i].value%></td>
           <td><%=transactionData[i].type%></td>
@@ -58,4 +64,28 @@
       <% }%>
     </tbody>
   </table>
+  <div class="pagination">
+    <div class="first">
+      First
+    </div>
+    <div class="first">
+      Prev
+    </div>
+    <div class="pageInfo">PAGE 1 OF 220</div>
+    <div class="last">
+      Next
+    </div>
+    <div class="last">
+      Last
+    </div>
+  </div>
 </article>
+<script type="text/javascript">
+  var a= "<%=transactionData%>";
+  console.log(a[0]);
+  var aa=document.querySelector(".first");
+  aa.addEventListener('click',function() {
+    alert("111");
+  });
+  console.log(aa);
+</script>

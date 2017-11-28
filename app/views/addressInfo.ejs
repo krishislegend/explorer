@@ -1,0 +1,61 @@
+<% layout('index') -%>
+<ul class="com-title">
+  <li>
+    <img class="ico-img" src="/img/ico.png" alt="">
+  </li>
+  <li>
+    <% for(var i in breadcrumbs){ %>
+      <% if(i==="OVERVIEW FOR BLOCK"||i==="ADDRESS"||i==="TRANSACTIONS"){ %>
+        -
+        <%}%>
+          <a class="color-blue" href=<%=breadcrumbs[i]%>><%=i %></a>
+          <% } %>
+  </li>
+</ul>
+<article class="blockInfo-box">
+  <ul class="titleAddr">
+    <li>
+      <em class="floatLeft ico-y"></em>
+      <span class="floatLeft addr-tit">Address:<%=addrTitle.address%></span>
+      <span class="addr-mess"></span>
+    </li>
+    <li>
+      <em class="floatLeft ico-y"></em>
+      <span class="floatLeft addr-tit">WAN balance:<%=addrTitle["wan balance"]%></span>
+      <span class="addr-mess"></span>
+    </li>
+    <li>
+      <em class="floatLeft ico-y"></em>
+      <span class="floatLeft addr-tit">No of Transactions:<%=addrTitle["no of trans"]%></span>
+      <span class="addr-mess"></span>
+    </li>
+  </ul>
+  <table class="com-table" border="0" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>TxHash</th>
+        <th>Age</th>
+        <th>Block</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Value</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i=0;i<transactionData.length;i++) {%>
+        <tr>
+          <td><%=i+1%></td>
+          <td><a href="/block/trans/<%= transactionData[i].txhash %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].txhash.substr(0,18)+'...'%></a></td>
+          <td><%=transactionData[i].age%></td>
+          <td><%=transactionData[i].block%></td>
+          <td><a href="/block/addr/<%= transactionData[i].from %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].from.substr(0,18)+'...'%></a></td>
+          <td><a href="/block/addr/<%= transactionData[i].to %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].to.substr(0,18)+'...'%></a></td>
+          <td><%=transactionData[i].value%></td>
+          <td><%=transactionData[i].type%></td>
+        </tr>
+      <% }%>
+    </tbody>
+  </table>
+</article>

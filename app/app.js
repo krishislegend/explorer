@@ -1,56 +1,50 @@
-'use strict';
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var engine = require('ejs-mate');
+var connectDB = require('./routes/connectDB');
 
-angular.module('ethExplorer', ['ngRoute','ui.bootstrap'])
+var app = express();
 
-.config(['$routeProvider',
-    function($routeProvider) {
-        $routeProvider.
-            when('/', {
-                templateUrl: 'views/main.html',
-                controller: 'mainCtrl'
-            }).
-	    when('/:blockListId', {
-		templateUrl: 'views/main2.html',
-                controller: 'mainCtrl2'
-	    }).
-            when('/block/:blockId', {
-                templateUrl: 'views/blockInfos.html',
-                controller: 'blockInfosCtrl'
-            }).
-            when('/transaction/:transactionId', {
-                templateUrl: 'views/transactionInfos.html',
-                controller: 'transactionInfosCtrl'
-            }).
-            when('/address/:addressId', {
-                templateUrl: 'views/addressInfo.html',
-                controller: 'addressInfoCtrl'
-            }).
-	  /*JGu: temporarily remove html/controller for address list
-	    when('/addressList/:transactionId', {
-	        templateUrl: 'views/addressList.html',
-                controller: 'addressListCtrl'
-		}).*/
-            otherwise({
-                redirectTo: '/'
-            });
-    }])
-    .run(function($rootScope) {
-        var web3 = new Web3();
-	var eth_node_url_string = 'http://' + location.hostname + ':8545';  // remote URL. assuming eth_node server = web server. This can change. A DNS name is more flexible.
-	//var eth_node_url = new URL(eth_node_url_string);      // for remote host mode
-        var eth_node_url = 'http://localhost:8545';             // for local host mode
-	console.log("eth_node_url: " + eth_node_url);
+// view engine setup
+app.engine('ejs', engine);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-	web3.setProvider(new web3.providers.HttpProvider(eth_node_url));
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'api')));
 
-        $rootScope.web3 = web3;
-        function sleepFor( sleepDuration ){
-            var now = new Date().getTime();
-            while(new Date().getTime() < now + sleepDuration){ /* do nothing */ } 
-        }
-        var connected = false;
-        if(!web3.isConnected()) {
-            $('#connectwarning').modal({keyboard:false,backdrop:'static'}) 
-            $('#connectwarning').modal('show') 
-        }
-    });
+app.use('/', connectDB);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development'
+    ? err
+    : {};
+
+  // render the error page
+  res.status(err.status || 500).render('error', {
+    breadcrumbs: {
+      "BLOCKS": "/"
+    }
+  });;
+});
+
+module.exports = app;

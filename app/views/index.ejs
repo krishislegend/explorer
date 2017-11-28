@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>WanChain</title>
+  <link rel='stylesheet' href='/css/style.css' />
+</head>
+
+<body>
+  <header class="com-header" id="search">
+    <dl class="floatLeft nav-left" id="nav-left">
+      <dt class="floatLeft"><a href="/"><img class="logo-img" src="/img/logo.png" alt=""></a></dt>
+      <dd class="floatLeft">
+        <h1 class="nav-title">
+          <span class="nav-t1"><a href="/">WANCHAIN</a></span>
+          <span class="nav-t2">Block Explorer</span>
+        </h1>
+        <p class="nav-num">Beta version 1.0</p>
+      </dd>
+    </dl>
+    <div class="floatRight search-bar" id="search-bar">
+      <div class="seacr-box floatLeft">
+        <em class="sea-ico">
+            <img src="/img/sear-ico.png" alt="">
+        </em>
+        <input id="input_text" type="text" class="sea-inp" name="" value="" placeholder="Search by Address/Txhash/Block">
+      </div>
+      <a class="go-btn floatRight">
+          <span class="go-tex" id="go_search">GO</span>
+          <em>
+            <img class="go-img" src="/img/go.png" alt="">
+          </em>
+      </a>
+    </div>
+  </header>
+  <section class="cont-box">
+    <%- body -%>
+  </section>
+  <script type="text/javascript" src="/js/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<% layout('index') -%>
+<ul class="com-title">
+  <li>
+    <img class="ico-img" src="/img/ico.png" alt="">
+  </li>
+  <li>
+    <% for(var i in breadcrumbs){ %>
+      <% if(i==="OVERVIEW FOR BLOCK"||i==="ADDRESS"||i==="TRANSACTIONS"){ %>
+        -
+        <%}%>
+          <a class="color-blue" href=<%=breadcrumbs[i]%>><%=i %></a>
+          <% } %>
+  </li>
+</ul>
+<article class="blocklist">
+  <table class="com-table" border="0" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+          <th>No</th>
+          <th>Height</th>
+          <th>Age</th>
+          <th>Txn</th>
+          <th>Gas Used</th>
+          <th>Size</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i=0;i<blocks.length;i++){ %>
+        <tr>
+          <td><%= i+1 %></td>
+          <td><a href="/block/<%= blocks[i].height %>"><%= blocks[i].height %></a></td>
+          <td><%= blocks[i].age %></td>
+          <td><%= blocks[i].txn %></td>
+          <td><%= blocks[i].gasUsed %></td>
+          <td><%= blocks[i].size + ' bytes' %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</article>

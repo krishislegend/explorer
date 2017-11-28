@@ -1,0 +1,32 @@
+<% layout('index') -%>
+<ul class="com-title">
+  <li>
+    <img class="ico-img" src="/img/ico.png" alt="">
+  </li>
+  <li>
+    <% for(var i in breadcrumbs){ %>
+      <% if(i==="OVERVIEW FOR BLOCK"||i==="ADDRESS"||i==="TRANSACTIONS"){ %>
+        -
+        <%}%>
+          <a class="color-blue" href=<%=breadcrumbs[i]%>><%=i %></a>
+          <% } %>
+  </li>
+</ul>
+<article class="blockInfo-box">
+  <table class="blockInfo-table" border="0" cellspacing="0" cellpadding="0">
+    <caption class="blockInfo-title">Transaction information</caption>
+    <tbody>
+      <% for(var i in transInfo) {%>
+        <tr>
+          <%if(i==="From"||i==="To"){%>
+            <td><%=i%></td>
+            <td><a href="/block/addr/<%= transInfo[i] %>?bnum=<%=transInfo["Height"]%>"><%=transInfo[i]%></a></td>
+          <%} else{%>
+            <td><%=i%></td>
+            <td><%=transInfo[i]%></td>
+          <%}%>
+        </tr>
+      <% }%>
+    </tbody>
+  </table>
+</article>

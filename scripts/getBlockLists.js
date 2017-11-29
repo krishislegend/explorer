@@ -12,7 +12,7 @@ var database = 'index';
 
 var Web3 = require('web3');
 var web3 = new Web3();
-var eth_node_url = 'http://121.42.8.74:8545'; // for local host mode
+var eth_node_url = 'http://localhost:8545'; // for local host mode
 console.log("eth_node_url: " + eth_node_url);
 web3.setProvider(new web3.providers.HttpProvider(eth_node_url));
 
@@ -30,7 +30,7 @@ function usage() {
 // check options
 if (process.argv.length < 2) {
     usage();
-} 
+}
 var count_in = process.argv[2];
 if (isNaN(count_in)) {
    usage();
@@ -144,4 +144,3 @@ is_locked(function(exists) {
         });
     }
 });
-

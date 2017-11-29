@@ -21,9 +21,9 @@ function listData(obj) {
     });
   }
   return Object.assign({
-      breadcrumbs: {
-        "BLOCKS": "/"
-      }
+    breadcrumbs: {
+      "BLOCKS": "/"
+    }
   }, {blocks});
 }
 
@@ -78,6 +78,8 @@ function addressData(addrInfo, result, blockNum) {
       type: val.txtype
     }
   });
+  var transString = JSON.stringify(transactionData);
+  console.log(transString);
   return {
     breadcrumbs: {
       "HOME BLOCKS": "/",

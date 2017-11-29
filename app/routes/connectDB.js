@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var dbRouter = require('./dbRouter');
-const Wanblock = require('../models/wanblock');
 const options = {
   useMongoClient: true,
   "user": "Jason",

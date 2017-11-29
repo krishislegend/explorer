@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var web3Router = require('./web3Router');
-const Wanblock = require('../models/wanblock');
-const Wantx = require('../models/wantx');
-const Wanaddress = require('../models/wanaddress');
+const Wanblock = require('../../models/wanblock');
+const Wantx = require('../../models/wantx');
+const Wanaddress = require('../../models/wanaddress');
 const bc = {
   breadcrumbs: {
     "BLOCKS": "/"

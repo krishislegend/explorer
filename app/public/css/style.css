@@ -2,10 +2,13 @@
 body{ margin:0;padding: 0;font-family: MicrosoftYaHei-Bold; color: #3f454c; background-color: #f7f8fc; }
 ul li{ list-style-type: none;}
 a{ text-decoration: none;}
+a:visited{color:#1992fc;}
+a:link{color:#1992fc;}
 h1,h2,p{ margin:0;padding:0;}
 dl{ margin:0;padding:0;}
 dd{ margin-left: 0;}
 input{ outline: none;}
+tr:hover{color:#1992fc;}
 .floatLeft{ float: left;}
 .floatRight{ float: right;}
 .color-blue{color: #4b90f7;}
@@ -25,6 +28,8 @@ input{ outline: none;}
 .sea-ico{ position: absolute; left: 2px; bottom: 4px;}
 .sea-ico img{ width: 15px; height: 15px;}
 .sea-inp{ width: 312px; height: 30px; border: none; margin-left: 25px;}
+.sea-inp::-webkit-input-placeholder{ color:#c6cbd7;font-size:14px;letter-spacing: 1px;}
+.sea-inp::-moz-placeholder{ color:#c6cbd7;font-size:14px;letter-spacing: 1px;}
 .go-btn{ cursor: pointer!important; width: 100px; height: 32px; line-height: 32px; position: relative; right: 20px; display: block; background: linear-gradient(to right,#1a90fc , #00d2ff);  box-shadow: 0px 6px 10px 0px rgba(15, 104, 170, 0.12); border-radius: 32px;}
 .go-tex{ color: #fff; font-size: 18px; margin-left: 25px; font-weight: 600;}
 .go-img{ width: 18px; height: 16px; top: 7px; position: absolute; right: 20px;}
@@ -81,3 +86,6 @@ a[href^="javascript"]{ cursor: default; color:#929cb8; }
 .balTex2{color: #929cb8; font-size: 12px;}
 .tabIn{	width: 45px; height: 20px; line-height: 20px; font-size: 12px; display: inline-block; color: #ffffff; background-color: #1993fd; border-radius: 10px;}
 .tabOut{	width: 45px; height: 20px; line-height: 20px; font-size: 12px; display: inline-block; color: #ffffff; background-color: #ff750f; border-radius: 10px;}
+/*notfound Page*/
+.notfound tbody>tr{height:500px;}
+.notMessage{margin-top:10px;color:#c6cbd7}

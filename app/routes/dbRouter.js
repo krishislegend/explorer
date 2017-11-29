@@ -5,11 +5,14 @@ var web3Router = require('./web3Router');
 const Wanblock = require('../../models/wanblock');
 const Wantx = require('../../models/wantx');
 const Wanaddress = require('../../models/wanaddress');
+
+//面包屑数据
 const bc = {
   breadcrumbs: {
     "BLOCKS": "/"
   }
 };
+
 router.get('/', (req, res, next) => {
   let response = res,
     obj;
@@ -33,13 +36,18 @@ router.get('/block/:blockNum', (req, res, next) => {
   let response = res,
     obj;
   let request = req.params.blockNum;
+  console.log(request);
   //获取某一个块的Info
   Wanblock.find({
     number: request
   }, (err, result, res) => {
-    if (err || result.length === 0) {
+    if (err) {
       response.render('error', bc);
       return console.log(err);
+    }
+    if(result.length === 0){
+        response.render('notfound', bc);
+        return;
     }
     let resultBlock = result[0];
     //获得属于这个快的所有的transactionInfo
@@ -66,9 +74,13 @@ router.get('/block/addr/:addrHash', (req, res, next) => {
   Wanaddress.find({
     a_id: req.params.addrHash
   }, (err, result, res) => {
-    if (err || result.length === 0) {
+    if (err) {
       response.render('error', bc);
       return console.log(err);
+    }
+    if(result.length === 0){
+      response.render('notfound', bc);
+      return;
     }
     let addrInfo = result[0];
     addrInfo.txs.forEach((val, index) => {
@@ -98,14 +110,23 @@ router.get('/block/trans/:transHash', (req, res, next) => {
   Wantx.find({
     hash: req.params.transHash
   }, (err, result, res) => {
-    if (err || result.length === 0) {
+    if (err) {
       response.render('error', bc);
       return console.log(err);
+    }
+    if(result.length === 0){
+      response.render('notfound', bc);
+      return;
     }
     obj = require('../api/db/getData').transData(result[0], req.query.bnum);
     response.render('transactionInfo', obj);
   });
 });
 
+router.get('/notfound',(req,res,next)=>{
+  res.render('notfound',bc);
+});
+
 router.use('/', web3Router);
+
 module.exports = router;

@@ -1,5 +1,5 @@
 window.onload=function() {
-  var go=document.getElementById("go_search");
+  var go=document.getElementById("goSearch");
   go.addEventListener('click',function() {
     var val=document.getElementById('input_text').value;
     if(val.length===0){
@@ -11,7 +11,7 @@ window.onload=function() {
     }else if(val.length===42){
       window.open(`/block/addr/${val}`);
     }else{
-      window.open("/error");
+      window.open("/notfound");
     }
   });
 }

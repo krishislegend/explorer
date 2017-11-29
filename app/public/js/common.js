@@ -48,6 +48,17 @@ function timeConversion(time) {
   return parseInt(time/1440)+' days '+timeConversion(time%1440);
 }
 
+//将数组拆分成固定长度
+function spiltArray(arr,subArrayLen){
+  if(arr.length<=subArrayLen) return [arr];
+  var index=0,newArray=[];
+  while(index < arr.length) {
+       newArray.push(arr.slice(index, index += subArrayLen));
+  }
+  return newArray;
+}
+
 exports.getUTC= getUTC;
 exports.formatNum= formatNum;
 exports.timeConversion= timeConversion;
+exports.spiltArray= spiltArray;

@@ -65,21 +65,42 @@
     </tbody>
   </table>
   <div class="pagination">
-    <div class="first">
+    <a class="first" id="goFirst" href="/block/addr/<%=addrTitle.address%>?bnum=<%=blockNum%>&page=1">
       First
-    </div>
-    <div class="first">
+    </a>
+    <a class="first" id="goPrev" disabled=true>
       Prev
-    </div>
-    <div class="pageInfo">PAGE 1 OF 220</div>
-    <div class="last">
-      Next
-    </div>
-    <div class="last">
+    </a>
+    <div class="pageInfo" data-curr="<%=currPage%>">PAGE <%=currPage%> OF <%=transLen%></div>
+    <a class="last" id="goLast" href="/block/addr/<%=addrTitle.address%>?bnum=<%=blockNum%>&page=<%=transLen%>">
       Last
-    </div>
+    </a>
+    <a class="last" id="goNext">
+      Next
+    </a>
   </div>
 </article>
 <script type="text/javascript">
-
+  var transLen="<%=transLen%>";
+  var addr="<%=addrTitle.address%>";
+  var block="<%=blockNum%>";
+  var nextPage=parseInt("<%=currPage%>")+1;
+  var prevPage=parseInt("<%=currPage%>")-1;
+  console.log(prevPage);
+  var goNext=document.getElementById("goNext");
+  var goPrev=document.getElementById("goPrev");
+  if(nextPage>transLen){
+    goNext.removeAttribute('href');
+    goNext.style="opacity:0.4";
+  }else{
+    goNext.href=`/block/addr/${addr}?bnum=${block}&page=${nextPage}`;
+    goNext.style="opacity:1";
+  }
+  if(prevPage<=0){
+    goPrev.removeAttribute('href');
+    goPrev.style="opacity:0.4"
+  }else{
+    goPrev.href=`/block/addr/${addr}?bnum=${block}&page=${prevPage}`;
+    goPrev.style="opacity:1"
+  }
 </script>

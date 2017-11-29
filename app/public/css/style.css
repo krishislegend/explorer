@@ -38,7 +38,7 @@ input{ outline: none;}
 .com-table tr:nth-child(even) td { background: #f7f8fc;}
 .com-table tr th{ height: 40px; font-size: 14px; background: #f7f8fc; border: none；}
 .com-table tr td{ height: 40px; border: none；}
-.blockInfo-box{height:800px;box-shadow: 0px 3px 8px 0px rgba(15, 104, 170, 0.06); border-radius: 4px; background: #fff; margin-bottom: 20px;}
+.blockInfo-box{box-shadow: 0px 3px 8px 0px rgba(15, 104, 170, 0.06); border-radius: 4px; background: #fff; margin-bottom: 20px;}
 .blockInfo-table{width: 100%; padding: 20px; text-align: left; background: #fff;}
 .blockInfo-title{ margin:20px 0 0 20px; font-size: 16px; font-weight: 600; text-align: left; padding-left: 15px; border-left: 2px solid #4b90f7;}
 .blockInfo-table tr:nth-child(odd) td { background: #f7f8fc;}

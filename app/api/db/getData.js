@@ -1,4 +1,4 @@
-const maxBlocks = 11; //制定查询block的数量
+const maxBlocks = 11; //指定查询block的数量
 const format = require("../../public/js/common.js");
 
 function listData(obj) {
@@ -61,13 +61,18 @@ function blockData(block, result) {
   }
 }
 
-function addressData(addrInfo, result, blockNum) {
+function addressData(addrInfo, result, blockNum,page) {
+  //定义一页显示的trans数量
+  const listNum = 8;
+  //定于当前位于第几页
+  var currPage=page||1;
   let addrTitle = {
     address: addrInfo.a_id,
     "wan balance": addrInfo.balance,
     "no of trans": addrInfo.received - addrInfo.sent + ' txn'
   };
-  let transactionData = result.map((val, index) => {
+  //对获取的数据做分组处理，与页面分页数据相对应
+  let transData = format.spiltArray(result.map((val, index) => {
     return {
       txhash: val.hash,
       age: format.timeConversion(Math.ceil((new Date().getTime() - val.timestamp * 1000) / 60000)),
@@ -77,17 +82,19 @@ function addressData(addrInfo, result, blockNum) {
       value: val.value + ' WAN',
       type: val.txtype
     }
-  });
-  var transString = JSON.stringify(transactionData);
-  console.log(transString);
+  }), listNum);
+  var transactionData = transData[currPage-1];
   return {
     breadcrumbs: {
       "HOME BLOCKS": "/",
       "OVERVIEW FOR BLOCK": `/block/${blockNum}`,
       "ADDRESS": "javascript:return false;"
     },
+    transLen: transData.length,
     addrTitle,
-    transactionData
+    transactionData,
+    currPage,
+    blockNum
   }
 }
 

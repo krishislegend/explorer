@@ -83,7 +83,7 @@ router.get('/block/addr/:addrHash', (req, res, next) => {
         response.render('error', bc);
         return console.log(err);
       }
-      obj = require('../api/db/getData').addressData(addrInfo, result, req.query.bnum);
+      obj = require('../api/db/getData').addressData(addrInfo, result, req.query.bnum,req.query.page);
       response.render('addressInfo', obj);
     });
   });

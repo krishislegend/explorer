@@ -12,12 +12,12 @@
     "ejs": "~2.5.7",
     "ejs-mate": "^2.3.0",
     "express": "~4.15.5",
+    "jsonminify": "0.2.3",
+    "mongodb": "2.0.45",
     "mongoose": "4.1.10",
     "morgan": "~1.9.0",
     "serve-favicon": "~2.4.5",
-    "web3": "^0.14.1",
-    "jsonminify": "0.2.3",
-    "mongodb": "2.0.45"
+    "web3": "^0.14.1"
   },
   "devDependencies": {
     "nodemon": "^1.12.1"

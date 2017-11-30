@@ -2,7 +2,6 @@ const maxBlocks = 11; //指定查询block的数量
 const Wanblock = require('../../../models/wanblock');
 const format = require("../../public/js/common.js");
 
-
 function listData(obj) {
   let blockNum = parseInt(obj.length, 10);
   if (maxBlocks > blockNum) {
@@ -63,11 +62,11 @@ function blockData(block, result) {
   }
 }
 
-function addressData(addrInfo, result, blockNum,page) {
+function addressData(addrInfo, result, blockNum, page) {
   //定义一页显示的trans数量
   const listNum = 9;
   //定于当前位于第几页
-  var currPage=page||1;
+  var currPage = page || 1;
   let addrTitle = {
     address: addrInfo.a_id,
     "wan balance": addrInfo.balance,
@@ -77,24 +76,21 @@ function addressData(addrInfo, result, blockNum,page) {
   let transData = format.spiltArray(result.map((val, index) => {
     return {
       txhash: val.hash,
-      age:  Wanblock.find({number:val.blockNumber}, (err, result, res) => {
-          if (err) {
-            return console.log(err);
-          }
-          return format.timeConversion(Math.ceil((new Date().getTime() - result[0].timestamp * 1000) / 60000))
-        }),
-      // age: val.timestamp,
+      age: val.timestamp,
       block: val.blockNumber,
       from: val.from,
       to: val.to,
       value: val.value + ' WAN',
       type: val.txtype,
-      classFrom:val.from===addrTitle.address?"tabOut":"tabIn",
-      outIn:val.from===addrTitle.address?"OUT":"IN"
+      classFrom: val.from === addrTitle.address
+        ? "tabOut"
+        : "tabIn",
+      outIn: val.from === addrTitle.address
+        ? "OUT"
+        : "IN"
     }
   }), listNum);
-  console.log(transData);
-  var transactionData = transData[currPage-1];
+  var transactionData = transData[currPage - 1];
   return {
     breadcrumbs: {
       "HOME BLOCKS": "/",

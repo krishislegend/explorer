@@ -8,7 +8,7 @@ h1,h2,p{ margin:0;padding:0;}
 dl{ margin:0;padding:0;}
 dd{ margin-left: 0;}
 input{ outline: none;}
-tr:hover{color:#1992fc;}
+tbody>tr:hover{color:#1992fc;}
 .floatLeft{ float: left;}
 .floatRight{ float: right;}
 .color-blue{color: #4b90f7;}
@@ -44,6 +44,7 @@ tr:hover{color:#1992fc;}
 .com-table tr th{ height: 40px; font-size: 14px; background: #f7f8fc; border: none；}
 .com-table tr td{ height: 40px; border: none；}
 .blockInfo-box{box-shadow: 0px 3px 8px 0px rgba(15, 104, 170, 0.06); border-radius: 4px; background: #fff; margin-bottom: 20px;}
+.addr-table{min-height:620px;position: relative;}
 .blockInfo-table{width: 100%; padding: 20px; text-align: left; background: #fff;}
 .blockInfo-title{ margin:20px 0 0 20px; font-size: 16px; font-weight: 600; text-align: left; padding-left: 15px; border-left: 2px solid #4b90f7;}
 .blockInfo-table tr:nth-child(odd) td { background: #f7f8fc;}
@@ -67,7 +68,7 @@ a[href^="javascript"]{ cursor: default; color:#929cb8; }
 .err_p{color: #929cb8; font-size: 14px; margin-top: px;}
 .err_a{ font-size: 12px; color: #1992fc!important;}
 /*pagination in addressInfo*/
-.pagination{margin:30px auto;width:480px;}
+.pagination{margin-top:20px;width:480px;overflow: hidden;position: absolute;bottom: 15px;text-align: center;margin-left: 50%;left:-240px;}
 .pagination>.pageInfo{height: 26px;width:180px;margin-left:2%;float:left;line-height: 26px;text-align: center;border: solid 1px #d2e3f1;background-color: #f7f8fc;border-radius: 15px;color:#929cb8}
 .first{float:left;margin-right:5px;width:60px;height:26px;border: solid 1px #4b90f7;line-height: 26px;text-align: center;cursor: pointer;color:#4b90f7}
 .last{float:right;margin-right:5px;width:60px;height:26px;border: solid 1px #4b90f7;line-height: 26px;text-align: center;cursor: pointer;color:#4b90f7}

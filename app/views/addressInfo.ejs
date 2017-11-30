@@ -12,7 +12,7 @@
           <% } %>
   </li>
 </ul>
-<article class="blockInfo-box">
+<article class="blockInfo-box addr-table">
   <div class="balCont">
     <dl class="floatLeft balanceBox">
       <dt class="balDt floatLeft">
@@ -56,7 +56,7 @@
           <td><%=transactionData[i].age%></td>
           <td><%=transactionData[i].block%></td>
           <td><a href="/block/addr/<%= transactionData[i].from %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].from.substr(0,18)+'...'%></a></td>
-          <td><span class="tabOut">OUT</span></td>
+          <td><span class="<%=transactionData[i].classFrom%>"><%=transactionData[i].outIn%></span></td>
           <td><a href="/block/addr/<%= transactionData[i].to %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].to.substr(0,18)+'...'%></a></td>
           <td><%=transactionData[i].value%></td>
           <td><%=transactionData[i].type%></td>
@@ -86,7 +86,6 @@
   var block="<%=blockNum%>";
   var nextPage=parseInt("<%=currPage%>")+1;
   var prevPage=parseInt("<%=currPage%>")-1;
-  console.log(prevPage);
   var goNext=document.getElementById("goNext");
   var goPrev=document.getElementById("goPrev");
   if(nextPage>transLen){
@@ -103,4 +102,5 @@
     goPrev.href=`/block/addr/${addr}?bnum=${block}&page=${prevPage}`;
     goPrev.style="opacity:1"
   }
+
 </script>

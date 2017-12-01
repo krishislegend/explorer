@@ -25,7 +25,7 @@ function formatHMS(cur) {
   }
 }
 
-//将位数较多的每三位用逗号分割
+//format number
 function formatNum(n) {
   var b = parseInt(n).toString();
   var len = b.length;
@@ -48,7 +48,7 @@ function timeConversion(time) {
   return parseInt(time/1440)+' days '+timeConversion(time%1440);
 }
 
-//将数组拆分成固定长度
+//splite array in a given length
 function spiltArray(arr,subArrayLen){
   if(arr.length<=subArrayLen) return [arr];
   var index=0,newArray=[];

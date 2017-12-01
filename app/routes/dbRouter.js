@@ -6,7 +6,7 @@ const Wanblock = require('../../models/wanblock');
 const Wantx = require('../../models/wantx');
 const Wanaddress = require('../../models/wanaddress');
 
-//面包屑数据
+//breadcrumbs
 const bc = {
   breadcrumbs: {
     "BLOCKS": "/"
@@ -14,6 +14,7 @@ const bc = {
 };
 
 router.get('/', (req, res, next) => {
+  console.log(req);
   let response = res,
     obj;
   //if cannot connect to DB,try to get data by web3
@@ -36,8 +37,7 @@ router.get('/block/:blockNum', (req, res, next) => {
   let response = res,
     obj;
   let request = req.params.blockNum;
-  console.log(request);
-  //获取某一个块的Info
+  //Get Informations about some block
   Wanblock.find({
     number: request
   }, (err, result, res) => {
@@ -50,7 +50,7 @@ router.get('/block/:blockNum', (req, res, next) => {
         return;
     }
     let resultBlock = result[0];
-    //获得属于这个快的所有的transactionInfo
+    //Get all the transaction Info about this block
     Wantx.find({
       blockNumber: request
     }, (err, result, res) => {

@@ -1,8 +1,8 @@
 const Web3 = require("web3");
-const maxBlocks = 11; //制定查询block的数量
+const maxBlocks = 11; //define a number of query block
 const format=require("../../public/js/common.js");
 
-//获得当前指定数量的block，并格式化data
+//Get information about the current block list，and format the data
 function listData(obj, maxBlocks) {
   let blockNum = parseInt(obj.eth.blockNumber, 10);
   if (maxBlocks > blockNum) {
@@ -13,7 +13,6 @@ function listData(obj, maxBlocks) {
     data;
   for (var i = 0; i < maxBlocks; ++i) {
     data = obj.eth.getBlock(blockNum - i);
-    // blocks.push(web3.eth.getBlock(blockNum - i));
     blocks.push({
       height: data.number,
       age: format.timeConversion(Math.ceil((new Date().getTime() - data.timestamp * 1000) / 60000)),
@@ -29,7 +28,7 @@ function listData(obj, maxBlocks) {
   }, {blocks});
 }
 
-//获得当前block的信息，并格式化data
+//Get information about the current block，and format the data
 function blockData(obj, blockNum) {
   let info = obj.eth.getBlock(blockNum,true);
   let formatData = {
@@ -65,7 +64,7 @@ function blockData(obj, blockNum) {
   }
 }
 
-//获得指定addressHash的信息
+//Get information about the specified addressHash
 function addressData(obj,addr,blockNum) {
 
   return {
@@ -77,7 +76,7 @@ function addressData(obj,addr,blockNum) {
   }
 }
 
-//获得指定transHash的信息
+//Get information about the specified transHash
 function transData(obj,trans,blockNum){
   let info = obj.eth.getTransaction(trans);
   let timestamp=obj.eth.getBlock(blockNum).timestamp*1000;
@@ -104,7 +103,7 @@ function transData(obj,trans,blockNum){
   }
 }
 
-//创建web3的实例，并获取所需数据
+//Create an instance of Web3 and get the required data
 function createWeb3(func) {
   if (typeof web3 !== 'undefined') {
     web3 = new Web3(web3.currentProvider);

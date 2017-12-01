@@ -1,4 +1,4 @@
-const maxBlocks = 11; //指定查询block的数量
+const maxBlocks = 11; //define a number of query block
 const Wanblock = require('../../../models/wanblock');
 const format = require("../../public/js/common.js");
 
@@ -63,16 +63,16 @@ function blockData(block, result) {
 }
 
 function addressData(addrInfo, result, blockNum, page) {
-  //定义一页显示的trans数量
+  //Define a number of displays on a page
   const listNum = 9;
-  //定于当前位于第几页
+
   var currPage = page || 1;
   let addrTitle = {
     address: addrInfo.a_id,
     "wan balance": addrInfo.balance,
     "no of trans": addrInfo.received - addrInfo.sent + ' txn'
   };
-  //对获取的数据做分组处理，与页面分页数据相对应
+  //Packet processing for acquired data, corresponding to page paging data
   let transData = format.spiltArray(result.map((val, index) => {
     return {
       txhash: val.hash,
@@ -106,7 +106,6 @@ function addressData(addrInfo, result, blockNum, page) {
 }
 
 function transData(transObj, blockNum) {
-  // let timestamp=obj.eth.getBlock(blockNum).timestamp*1000;
   let transInfo = {
     TxHash: transObj.hash,
     Height: transObj.blockNumber,

@@ -10,13 +10,13 @@ const options = {
   "address" : "localhost",
   "port" : 27017
 };
-//创建一个连接到数据库
+
 mongoose.connect('mongodb://localhost/explorerdb', options)
-// 实例化连接对象
+
 var db = mongoose.connection;
 
 db.on('error', (callback) => {
-  console.log("MongoDB连接失败！");
+  console.log("MongoDB连接失败！","通过web3获取数据");
 })
 //
 db.on('open', (callback) => {

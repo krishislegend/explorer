@@ -5,11 +5,8 @@
   </li>
   <li>
     <% for(var i in breadcrumbs){ %>
-      <% if(i==="OVERVIEW FOR BLOCK"||i==="ADDRESS"||i==="TRANSACTIONS"){ %>
-        -
-        <%}%>
-          <a class="color-blue" href=<%=breadcrumbs[i]%>><%=i %></a>
-          <% } %>
+      <a class="color-blue" href=<%=breadcrumbs[i]%>><%=i %></a>
+    <% } %>
   </li>
 </ul>
 <article class="blocklist notfound">

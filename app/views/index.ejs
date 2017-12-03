@@ -4,9 +4,9 @@
 <head>
   <title>WanChain</title>
   <link rel='stylesheet' href='/css/style.css' />
-  <link rel='icon' href='/img/favicon.png'> 
+  <link rel='icon' href='/img/favicon.png'>
+  <meta http-equiv="content-language" content="en-US" />
 </head>
-
 <body>
   <header class="com-header" id="search">
     <dl class="floatLeft nav-left" id="nav-left">
@@ -24,14 +24,20 @@
         <em class="sea-ico">
             <img src="/img/sear-ico.png" alt="">
         </em>
-        <input id="input_text" type="text" class="sea-inp" name="" value="" placeholder="Search by Address/Txhash/Block">
+        <form id="search_bar">
+          <input id="input_text" required
+          oninvalid="setCustomValidity('Please enter valid data !');"
+          onMouseOver="this.title=' '"
+          type="text" class="sea-inp" maxlength="80"
+          placeholder="Search by Address / Txhash / Block">
+        </form>
       </div>
-      <a class="go-btn floatRight" id="goSearch">
+      <button class="go-btn floatRight" id="goSearch" style="border:none" form="search_bar">
           <span class="go-tex" id="go_search">GO</span>
           <em>
             <img class="go-img" src="/img/go.png" alt="">
           </em>
-      </a>
+      </button>
     </div>
   </header>
   <section class="cont-box">

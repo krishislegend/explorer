@@ -27,12 +27,12 @@ tbody>tr:hover{color:#1992fc;}
 .seacr-box{ width: 382px; height: 32px; position: relative; border-bottom: 2px solid #e8ebf0; margin-right: 20px;}
 .sea-ico{ position: absolute; left: 2px; bottom: 4px;}
 .sea-ico img{ width: 15px; height: 15px;}
-.sea-inp{ width: 312px; height: 30px; border: none; margin-left: 25px;}
+.sea-inp{ width: 350px; height: 30px; border: none; margin-left: 25px;}
 .sea-inp::-webkit-input-placeholder{ color:#c6cbd7;font-size:14px;letter-spacing: 1px;}
 .sea-inp::-moz-placeholder{ color:#c6cbd7;font-size:14px;letter-spacing: 1px;}
 .go-btn{ cursor: pointer!important; width: 100px; height: 32px; line-height: 32px; position: relative; right: 20px; display: block; background: linear-gradient(to right,#1a90fc , #00d2ff);  box-shadow: 0px 6px 10px 0px rgba(15, 104, 170, 0.12); border-radius: 32px;}
-.go-tex{ color: #fff; font-size: 18px; margin-left: 25px; font-weight: 600;}
-.go-img{ width: 18px; height: 16px; top: 7px; position: absolute; right: 20px;}
+.go-tex{ color: #fff; font-size: 18px; margin-left: -20px; font-weight: 300;}
+.go-img{ width: 18px; height: 16px; top: 9px; position: absolute; right: 20px;}
 .cont-box{margin: 20px;}
 .com-title{ margin: 0 0 20px 0; padding: 0; display: inline-block;}
 .com-title li{ float: left; margin-right: 15px; font-size: 16px; font-weight: 500;}

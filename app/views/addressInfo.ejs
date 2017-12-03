@@ -5,11 +5,11 @@
   </li>
   <li>
     <% for(var i in breadcrumbs){ %>
-      <% if(i==="OVERVIEW FOR BLOCK"||i==="ADDRESS"||i==="TRANSACTIONS"){ %>
+      <% if(i==="OVERVIEW FOR BLOCK"||i==="ADDRESS"){ %>
         -
-        <%}%>
+      <%}%>
           <a class="color-blue" href=<%=breadcrumbs[i]%>><%=i %></a>
-          <% } %>
+    <% } %>
   </li>
 </ul>
 <article class="blockInfo-box addr-table">

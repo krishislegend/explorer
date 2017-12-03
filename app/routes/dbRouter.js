@@ -14,7 +14,6 @@ const bc = {
 };
 
 router.get('/', (req, res, next) => {
-  console.log(req);
   let response = res,
     obj;
   //if cannot connect to DB,try to get data by web3

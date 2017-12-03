@@ -54,7 +54,7 @@ function blockData(block, result) {
   return {
     breadcrumbs: {
       "HOME": "/",
-      "OVERVIEW FOR BLOCK": `/block/${block.number}`,
+      "OVERVIEW FOR BLOCK": "javascript:return false;",
       ['#' + block.number]: "javascript:return false;"
     },
     formatData,

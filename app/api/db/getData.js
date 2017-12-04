@@ -1,19 +1,20 @@
-const maxBlocks = 11; //define a number of query block
 const Wanblock = require('../../../models/wanblock');
 const format = require("../../public/js/common.js");
 
+var listNum = 9; //define a number of displays on address page
+var maxBlocks = 11; //define a number of list block
+
 function listData(obj) {
-  let blockNum = parseInt(obj.length, 10);
-  if (maxBlocks > blockNum) {
-    maxBlocks = blockNum + 1;
+  let blockLen = obj.length;
+  if (maxBlocks > blockLen) {
+    maxBlocks = blockLen ;
   }
   // get latest maxBlocks blocks informations
   let blocks = [],
     data;
   for (var i = 0; i < maxBlocks; ++i) {
     data = obj[obj.length - 1 - i];
-    // blocks.push(web3.eth.getBlock(blockNum - i));
-    blocks.push({
+    blocks.unshift({
       height: data.number,
       age: format.timeConversion(Math.ceil((new Date().getTime() - data.timestamp * 1000) / 60000)),
       txn: data.transactions.length,
@@ -63,8 +64,6 @@ function blockData(block, result) {
 }
 
 function addressData(addrInfo, result, blockNum, page) {
-  //Define a number of displays on a page
-  const listNum = 9;
 
   var currPage = page || 1;
   let addrTitle = {

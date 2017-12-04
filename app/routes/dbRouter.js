@@ -20,7 +20,7 @@ router.get('/', (req, res, next) => {
   if (Wanblock.collection.conn._readyState !== 1) {
     next();
   };
-  Wanblock.find({}, (err, result, res) => {
+  Wanblock.find().sort({_id:-1}).limit(11).exec((err, result, res) => {
     if (err || result.length === 0) {
       return console.log(err);
     }
@@ -73,7 +73,7 @@ router.get('/block/addr/:addrHash', (req, res, next) => {
   Wanaddress.find({
     a_id: req.params.addrHash
   }, (err, result, res) => {
-    if (err) {
+    if (err || result.length === 0) {
       response.render('error', bc);
       return console.log(err);
     }
@@ -90,7 +90,7 @@ router.get('/block/addr/:addrHash', (req, res, next) => {
         $in: txh
       }
     }, (err, result, res) => {
-      if (err || result.length === 0) {
+      if (err) {
         response.render('error', bc);
         return console.log(err);
       }

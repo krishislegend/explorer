@@ -125,56 +125,56 @@ is_locked(function(exists) {
         console.log("Script already running..");
         process.exit(0);
     } else {
-        create_lock(function() {
-            console.log("script launched with pid: " + process.pid);
-            mongoose.connect(dbString, function(err) {
-                if (err) {
-                    console.log('Unable to connect to database');
-                    console.log('Aborting');
-                    exit();
-                } else {
-                    //WZ
-                    console.log('able to connect to database');
-                    web3.eth.getBlockNumber(function(error, block_num_node) {
-                        if (error) {
-                            console.error(error);
-                            exit();
-                        } else {
-                            console.log(block_num_node);
-                            db2.find_block_top(function(block_top_db) {
-                                if (block_top_db) {
-                                    console.log(block_top_db);
-                                    //compare block numbers from db and node.  If different, update db
-				    if(block_num_db < 1) {
-                                    	block_num_db = block_top_db[0].number;
-				    }
-                                    console.log("block num node:" + block_num_node);
-                                    if (block_num_db < block_num_node) {
-                                        // var count = 1;
-                                        lib.syncLoop(count, function(loop) {
-                                            var i = loop.iteration();
-                                            update_block_from_node(block_num_db+i+1, function() {
-                                            // update_block_from_node(299105, function() {
-                                                console.log("return from node_call 2");
-                                                loop.next();
-                                            });
-                                        }, function() {
-                                            console.log("Done with iteration");
-                                            exit();
+      create_lock(function() {
+  console.log("script launched with pid: " + process.pid);
+  mongoose.connect(dbString, function(err) {
+    if (err) {
+      console.log('Unable to connect to database');
+      console.log('Aborting');
+      exit();
+    } else {
+      //WZ
+      console.log('able to connect to database');
+      web3.eth.getBlockNumber(function(error, block_num_node) {
+        if (error) {
+          console.error(error);
+          exit();
+        } else {
+          console.log(block_num_node);
+          db2.find_block_top(function(block_top_db) {
+            if (block_top_db) {
+              console.log(block_top_db);
+              //compare block numbers from db and node.  If different, update db
+              if (block_num_db < 1) {
+                block_num_db = block_top_db[0].number;
+              }
+              console.log("block num node:" + block_num_node);
+              if (block_num_db < block_num_node) {
+                // var count = 1;
+                lib.syncLoop(count, function(loop) {
+                  var i = loop.iteration();
+                  update_block_from_node(block_num_db + i + 1, function() {
+                    // update_block_from_node(299105, function() {
+                    console.log("return from node_call 2");
+                    loop.next();
+                  });
+                }, function() {
+                  console.log("Done with iteration");
+                  exit();
 
-                                        });
+                });
 
-                                    }
-                                }
+              }
+            }
 
-                            });
-                        }
-                    })
+          });
+        }
+      })
 
-                }
-                //WZ mongoose connect end
-            });
-        });
+    }
+    //WZ mongoose connect end
+  });
+});
     }
 });
 

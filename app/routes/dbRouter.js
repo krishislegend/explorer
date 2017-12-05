@@ -20,7 +20,7 @@ router.get('/', (req, res, next) => {
   if (Wanblock.collection.conn._readyState !== 1) {
     next();
   };
-  Wanblock.find().sort({_id:-1}).limit(11).exec((err, result, res) => {
+  Wanblock.find().sort({number:-1}).limit(11).exec((err, result, res) => {
     if (err || result.length === 0) {
       return console.log(err);
     }

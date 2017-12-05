@@ -15,7 +15,7 @@ function listData(obj, maxBlocks) {
     data = obj.eth.getBlock(blockNum - i);
     blocks.push({
       height: data.number,
-      age: format.timeConversion(Math.ceil((new Date().getTime() - data.timestamp * 1000) / 60000)),
+      age: format.timeConversion(data.timestamp),
       txn: data.transactions.length,
       gasUsed: format.formatNum(data.gasUsed),
       size: data.size
@@ -33,7 +33,7 @@ function blockData(obj, blockNum) {
   let info = obj.eth.getBlock(blockNum,true);
   let formatData = {
     Height: blockNum,
-    TimeStamp: format.timeConversion((Math.ceil((new Date().getTime() - info.timestamp * 1000) / 60000))) + format.getUTC(info.timestamp*1000),
+    TimeStamp: format.timeConversion(info.timestamp) + format.getUTC(info.timestamp*1000),
     Transactions: `${info.transactions.length} transactions in this block`,
     Hash: info.hash,
     Size: info.size + ' bytes',
@@ -45,7 +45,7 @@ function blockData(obj, blockNum) {
   let transactionData=info.transactions.map((val,index)=>{
     return {
       txhash:val.hash,
-      age: format.timeConversion((Math.ceil((new Date().getTime() - info.timestamp * 1000) / 60000))),
+      age: format.timeConversion(info.timestamp),
       block:blockNum,
       from:val.from,
       to:val.to,
@@ -83,7 +83,7 @@ function transData(obj,trans,blockNum){
   let transInfo={
     TxHash:trans,
     Height:info.blockNumber,
-    TimeStamp:format.timeConversion((Math.ceil((new Date().getTime() - timestamp) / 60000))) + format.getUTC(timestamp),
+    TimeStamp:format.timeConversion(timestamp/1000) + format.getUTC(timestamp),
     From:info.from,
     To:info.to,
     Value:obj.fromWei(info.value,'ether')+' WAN',

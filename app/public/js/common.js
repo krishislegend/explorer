@@ -1,5 +1,6 @@
 const m = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Spt", "Oct", "Nov", "Dec")
 
+let bool=true;
 function getUTC(time) {
   var current = new Date(time);
   var mon = m[current.getUTCMonth()];
@@ -38,14 +39,16 @@ function formatNum(n) {
     : b.slice(r, len).match(/\d{3}/g).join(",");
 }
 
-function timeConversion(time) {
+function timeConversion(t,bool=true) {
+  let time;
+  bool?time=Math.ceil((new Date().getTime() - t * 1000) / 60000):time=t;
   if(time<=60){
     return time+'mins ago';
   }
   if(time<1440){
     return parseInt(time/60)+' hrs '+time%60+' mins ago';
   }
-  return parseInt(time/1440)+' days '+timeConversion(time%1440);
+  return parseInt(time/1440)+' days '+timeConversion(time%1440,false);
 }
 
 //splite array in a given length

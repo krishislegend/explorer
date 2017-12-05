@@ -5,34 +5,35 @@ var listNum = 9; //define a number of displays on address page
 var maxBlocks = 11; //define a number of list block
 
 function listData(obj) {
-  let blockLen = obj.length;
-  if (maxBlocks > blockLen) {
-    maxBlocks = blockLen ;
+  let len=obj.length;
+  if (maxBlocks > len) {
+    maxBlocks = len ;
   }
   // get latest maxBlocks blocks informations
   let blocks = [],
     data;
   for (var i = 0; i < maxBlocks; ++i) {
-    data = obj[obj.length - 1 - i];
+    data = obj[len - 1 - i];
     blocks.unshift({
       height: data.number,
-      age: format.timeConversion(Math.ceil((new Date().getTime() - data.timestamp * 1000) / 60000)),
+      age: format.timeConversion(data.timestamp),
       txn: data.transactions.length,
       gasUsed: format.formatNum(data.gasUsed),
       size: data.size
     });
   }
-  return Object.assign({
+  return {
     breadcrumbs: {
       "BLOCKS": "/"
-    }
-  }, {blocks});
+    },
+    blocks
+  }
 }
 
 function blockData(block, result) {
   let formatData = {
     Height: block.number,
-    TimeStamp: format.timeConversion(Math.ceil((new Date().getTime() - block.timestamp * 1000) / 60000)) + format.getUTC(block.timestamp * 1000),
+    TimeStamp: format.timeConversion(block.timestamp) + format.getUTC(block.timestamp * 1000),
     Transactions: `${block.transactions.length} transactions in this block`,
     Hash: block.hash,
     Size: block.size + ' bytes',
@@ -44,7 +45,7 @@ function blockData(block, result) {
   let transactionData = result.map((val, index) => {
     return {
       txhash: val.hash,
-      age: format.timeConversion(Math.ceil((new Date().getTime() - val.timestamp * 1000) / 60000)),
+      age: format.timeConversion(val.timestamp),
       block: val.blockNumber,
       from: val.from,
       to: val.to,
@@ -108,7 +109,7 @@ function transData(transObj, blockNum) {
   let transInfo = {
     TxHash: transObj.hash,
     Height: transObj.blockNumber,
-    TimeStamp: format.timeConversion((Math.ceil((new Date().getTime() - transObj.timestamp) / 60000))) + format.getUTC(transObj.timestamp),
+    TimeStamp: format.timeConversion(transObj.timestamp) + format.getUTC(transObj.timestamp),
     From: transObj.from,
     To: transObj.to,
     Value: transObj.value + ' WAN',

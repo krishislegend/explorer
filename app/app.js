@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var engine = require('ejs-mate');
-var connectDB = require('./routes/connectDB');
+var connectDB = require('./routes/connectDB').router;
 var helmet = require('helmet');
 
 var app = express();

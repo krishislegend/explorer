@@ -1,37 +1,66 @@
-<% layout('index') -%>
-<ul class="com-title">
-  <li>
-    <img class="ico-img" src="/img/ico.png" alt="">
-  </li>
-  <li>
-    <% for(var i in breadcrumbs){ %>
-      <a class="color-blue" href=<%=breadcrumbs[i]%>><%=i %></a>
-    <% } %>
-  </li>
-</ul>
-<article class="blocklist">
-  <table class="com-table" border="0" cellspacing="0" cellpadding="0">
-    <thead>
-      <tr>
-          <th>No</th>
-          <th>Height</th>
-          <th>Age</th>
-          <th>Txn</th>
-          <th>Gas Used</th>
-          <th>Size</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% for(var i=0;i<blocks.length;i++){ %>
-        <tr>
-          <td><%= i+1 %></td>
-          <td><a href="/block/<%= blocks[i].height %>"><%= blocks[i].height %></a></td>
-          <td><%= blocks[i].age %></td>
-          <td><%= blocks[i].txn %></td>
-          <td><%= blocks[i].gasUsed %></td>
-          <td><%= blocks[i].size + ' bytes' %></td>
-        </tr>
-      <% } %>
-    </tbody>
-  </table>
-</article>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WanChain</title>
+  <link rel='stylesheet' href='/css/listInfo.css' />
+</head>
+<body>
+  <header class="com-header" id="search">
+    <div class="hea-content">
+      <img class="heaBg" src="./img/heaBg.png" alt="">
+      <div class="heaMess">
+        <dl class="nav-left" id="nav-left">
+          <dt class="floatLeft"><a href="/"><img class="logo-img" src="/img/dalogo.png" alt=""></a></dt>
+          <dd class="floatLeft">
+            <h1 class="nav-title">
+              <span class="nav-t1"><a href="/">WANCHAIN</a></span>
+              <span class="nav-t2">Block Explorer</span>
+            </h1>
+          </dd>
+        </dl>
+        <div class="search-bar" id="search-bar">
+          <div class="seacr-box floatLeft">
+            <button class="sea-ico"></button>
+            <form id="search_bar">
+              <input id="input_text" required
+              oninvalid="setCustomValidity('Please enter valid data !');"
+              onMouseOver="this.title=' '"
+              type="text" class="sea-inp" maxlength="80"
+              placeholder="Search by Address / Txhash / Block">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <section class="cont-box">
+    <article class="blocklist">
+      <table class="com-table" border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr class="table-tr">
+              <th width="10%">No</th>
+              <th width="15%"><em class="table-ico1"></em>Height</th>
+              <th width="25%"><em class="table-ico2"></em>Age</th>
+              <th width="18%"><em class="table-ico3"></em>Txn</th>
+              <th width="18%"><em class="table-ico4"></em>Gas Used</th>
+              <th width="14%"><em class="table-ico5"></em>Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0;i<blocks.length;i++){ %>
+            <tr>
+              <td><%= i+1 %></td>
+              <td><a href="/block/<%= blocks[i].height %>"><%= blocks[i].height %></a></td>
+              <td><%= blocks[i].age %></td>
+              <td><%= blocks[i].txn %></td>
+              <td><%= blocks[i].gasUsed %></td>
+              <td><%= blocks[i].size + ' bytes' %></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </article>
+  </section>
+  <script type="text/javascript" src="/js/index.js"></script>
+</body>
+</html>

@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
   };
   Wanblock.find().sort({number:-1}).limit(11).exec((err, result, res) => {
     if (err || result.length === 0) {
-      return console.log(err);
+      return ;
     }
     obj = require('../api/db/getData').listData(result);
     response.render('listInfo', obj);
@@ -42,7 +42,7 @@ router.get('/block/:blockNum', (req, res, next) => {
   }, (err, result, res) => {
     if (err) {
       response.render('error', bc);
-      return console.log(err);
+      return ;
     }
     if(result.length === 0){
         response.render('notfound', bc);
@@ -55,7 +55,7 @@ router.get('/block/:blockNum', (req, res, next) => {
     }, (err, result, res) => {
       if (err) {
         response.render('error', bc);
-        return console.log(err);
+        return ;
       }
       obj = require('../api/db/getData').blockData(resultBlock, result);
       response.render('blockInfo', obj);
@@ -73,9 +73,9 @@ router.get('/block/addr/:addrHash', (req, res, next) => {
   Wanaddress.find({
     a_id: req.params.addrHash
   }, (err, result, res) => {
-    if (err || result.length === 0) {
+    if (err) {
       response.render('error', bc);
-      return console.log(err);
+      return ;
     }
     if(result.length === 0){
       response.render('notfound', bc);
@@ -92,7 +92,7 @@ router.get('/block/addr/:addrHash', (req, res, next) => {
     }, (err, result, res) => {
       if (err) {
         response.render('error', bc);
-        return console.log(err);
+        return ;
       }
       obj = require('../api/db/getData').addressData(addrInfo, result, req.query.bnum,req.query.page);
       response.render('addressInfo', obj);
@@ -111,7 +111,7 @@ router.get('/block/trans/:transHash', (req, res, next) => {
   }, (err, result, res) => {
     if (err) {
       response.render('error', bc);
-      return console.log(err);
+      return ;
     }
     if(result.length === 0){
       response.render('notfound', bc);

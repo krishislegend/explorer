@@ -20,7 +20,9 @@
     </dl>
     <div class="floatRight search-bar" id="search-bar">
       <div class="seacr-box floatLeft">
-        <button class="sea-ico"></button>
+        <em class="sea-ico">
+            <img src="/img/sear-ico.png" alt="">
+        </em>
         <form id="search_bar">
           <input id="input_text" required
           oninvalid="setCustomValidity('Please enter valid data !');"
@@ -29,6 +31,12 @@
           placeholder="Search by Address / Txhash / Block">
         </form>
       </div>
+      <button class="go-btn floatRight" id="goSearch" style="border:none" form="search_bar">
+          <span class="go-tex" id="go_search">GO</span>
+          <em>
+            <img class="go-img" src="/img/go.png" alt="">
+          </em>
+      </button>
     </div>
   </header>
   <section class="cont-box">

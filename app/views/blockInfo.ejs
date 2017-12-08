@@ -1,42 +1,57 @@
 <% layout('index') -%>
-<ul class="com-title">
-  <li>
-    <img class="ico-img" src="/img/ico.png" alt="">
-  </li>
-  <li>
-    <% for(var i in breadcrumbs){ %>
-      <% if(i==="OVERVIEW FOR BLOCK"){ %>
-        -
-        <%}%>
-          <a class="color-blue" href=<%=breadcrumbs[i]%>><%=i %></a>
-          <% } %>
-  </li>
-</ul>
+<div class="con-titBox">
+  <ul class="floatLeft com-titLeft">
+    <li>
+      <img class="ico-img" src="/img/ico.png" alt="">
+    </li>
+    <li><b>OVERVIEW FOR BLOCK</b> <span>#346732</span></li>
+  </ul>
+  <ul class="floatRight com-title">
+    <li>
+      <img class="ico-img" src="/img/ico.png" alt="">
+    </li>
+    <li>
+      <% for(var i in breadcrumbs){ %>
+        <% if(i==="OVERVIEW FOR BLOCK"){ %>
+          -
+          <%}%>
+            <a class="color-blue" href=<%=breadcrumbs[i]%>><%=i %></a>
+            <% } %>
+    </li>
+  </ul>
+</div>
 <article class="blockInfo-box">
   <table class="blockInfo-table" border="0" cellspacing="0" cellpadding="0">
-    <caption class="blockInfo-title">Block information</caption>
+    <caption class="blockInfo-title"><span class="bt-borLef"></span>Block information</caption>
     <tbody>
       <% for(var i in formatData) {%>
-        <tr>
-          <td><%=i%></td>
-          <td><%=formatData[i]%></td>
-        </tr>
+        <%if(i==="Height"){%>
+          <tr>
+            <td><%=i%></td>
+            <td><span class="last-ico"></span><%=formatData[i]%><span class="next-ico"></td>
+          </tr>
+        <%} else{%>
+          <tr>
+            <td><%=i%></td>
+            <td><%=formatData[i]%></td>
+          </tr>
+        <%}%>
       <% }%>
     </tbody>
   </table>
 </article>
 <article class="blockInfo-box">
   <table class="com-table" border="0" cellspacing="0" cellpadding="0">
-    <caption class="blockInfo-title">Transactions in current block</caption>
+    <caption class="blockInfo-title"><span class="bt-borLef"></span>Transactions in current block</caption>
     <thead>
-      <tr>
+      <tr class="table-tr">
         <th>No</th>
         <th>TxHash</th>
-        <th>Age</th>
+        <th><em class="table-ico2"></em>Age</th>
         <th>Block</th>
-        <th>From</th>
-        <th>To</th>
-        <th>Value</th>
+        <th><em class="table-ico7"></em>From</th>
+        <th><em class="table-ico8"></em>To</th>
+        <th><em class="table-ico9"></em>Value</th>
         <th>Type</th>
       </tr>
     </thead>

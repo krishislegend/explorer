@@ -56,7 +56,7 @@ function blockData(obj, blockNum) {
   return {
     breadcrumbs: {
       "HOME": "/",
-      "OVERVIEW FOR BLOCK": `/block/${blockNum}`,
+      "OVERVIEW FOR BLOCK": "javascript:return false;",
       ['#' + blockNum]: "javascript:return false;"
     },
     formatData,
@@ -66,7 +66,6 @@ function blockData(obj, blockNum) {
 
 //Get information about the specified addressHash
 function addressData(obj,addr,blockNum) {
-
   return {
     breadcrumbs: {
       "HOME BLOCKS": "/",

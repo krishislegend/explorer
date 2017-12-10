@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
 var web3Router = require('./web3Router');
-var maxBlocks = require('../api/db/getData').maxBlocks;
 const Wanblock = require('../../models/wanblock');
 const Wantx = require('../../models/wantx');
 const Wanaddress = require('../../models/wanaddress');
+let {maxBlocks,listData,blockData,addressData,transData} = require('../api/db/getData');
 
 //breadcrumbs
 const bc = {
@@ -25,7 +24,7 @@ router.get('/', (req, res, next) => {
     if (err || result.length === 0) {
       return ;
     }
-    obj = require('../api/db/getData').listData(result);
+    obj = listData(result);
     response.render('listInfo', obj);
   });
 });
@@ -58,7 +57,7 @@ router.get('/block/:blockNum', (req, res, next) => {
         response.render('error', bc);
         return ;
       }
-      obj = require('../api/db/getData').blockData(resultBlock, result);
+      obj = blockData(resultBlock, result);
       response.render('blockInfo', obj);
     })
   });
@@ -95,7 +94,7 @@ router.get('/block/addr/:addrHash', (req, res, next) => {
         response.render('error', bc);
         return ;
       }
-      obj = require('../api/db/getData').addressData(addrInfo, result, req.query.bnum,req.query.page);
+      obj = addressData(addrInfo, result, req.query.bnum,req.query.page);
       response.render('addressInfo', obj);
     });
   });
@@ -118,7 +117,7 @@ router.get('/block/trans/:transHash', (req, res, next) => {
       response.render('notfound', bc);
       return;
     }
-    obj = require('../api/db/getData').transData(result[0], req.query.bnum);
+    obj = transData(result[0], req.query.bnum);
     response.render('transactionInfo', obj);
   });
 });

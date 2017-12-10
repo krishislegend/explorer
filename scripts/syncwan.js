@@ -11,7 +11,7 @@ var mongoose = require('mongoose'),
 
 console.time("synctime");
 var count = 1;
-var block_num_db = 0;
+var block_num_db = -1;
 var mode = 'update';
 var database = 'index';
 
@@ -21,19 +21,17 @@ var eth_node_url = 'http://localhost:8545'; // for local host mode
 console.log("eth_node_url: " + eth_node_url);
 web3.setProvider(new web3.providers.HttpProvider(eth_node_url));
 
-
-
 // displays usage and exits
 function usage() {
     console.log('Usage: node scripts/sync.js count startNumber');
-    console.log('count: number of records to update');
-    console.log('startNumber: starting block number to update from database');
+    console.log('  count: number of records to update');
+    console.log('  startNumber: starting block number to update from database');
     console.log('');
     process.exit(0);
 }
 
 // check options
-if (process.argv.length < 2) {
+if (process.argv.length < 3) {
     usage();
 }
 var count_in = process.argv[2];
@@ -41,20 +39,19 @@ if (isNaN(count_in)) {
    usage();
 }
 count = parseInt(count_in);
-console.log("count="+count);
+//console.log("count="+count);
 
 if (process.argv.length >3) {
 console.log("start=");
-var startNumber_in = process.argv[3];
-if (isNaN(startNumber_in)) {
-   usage();
+   var startNumber_in = process.argv[3];
+   if (isNaN(startNumber_in)) {
+      usage();
    }
 block_num_db = parseInt(startNumber_in);
 }
 
 console.log("count="+count+", start Block num="+block_num_db);
 // return;
-
 
 function create_lock(cb) {
     if (database == 'index') {
@@ -90,7 +87,7 @@ function remove_lock(cb) {
 
 function is_locked(cb) {
     if (database == 'index') {
-        var fname = './tmp/' + database + '.pid';
+        var fname = '/tmp/' + database + '.pid';
         fs.exists(fname, function(exists) {
             if (exists) {
                 console.log("is_lock exists:" + fname);
@@ -145,7 +142,7 @@ is_locked(function(exists) {
             if (block_top_db) {
               console.log(block_top_db);
               //compare block numbers from db and node.  If different, update db
-              if (block_num_db < 1) {
+              if (block_num_db < 0) {
                 block_num_db = block_top_db[0].number;
               }
               console.log("block num node:" + block_num_node);

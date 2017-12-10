@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var web3Router = require('./web3Router');
+var maxBlocks = require('../api/db/getData').maxBlocks;
 const Wanblock = require('../../models/wanblock');
 const Wantx = require('../../models/wantx');
 const Wanaddress = require('../../models/wanaddress');
@@ -20,7 +21,7 @@ router.get('/', (req, res, next) => {
   if (Wanblock.collection.conn._readyState !== 1) {
     next();
   };
-  Wanblock.find().sort({number:-1}).limit(11).exec((err, result, res) => {
+  Wanblock.find().sort({number:-1}).limit(maxBlocks).exec((err, result, res) => {
     if (err || result.length === 0) {
       return ;
     }

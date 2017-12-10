@@ -2,7 +2,7 @@ const Wanblock = require('../../../models/wanblock');
 const format = require("../../public/js/common.js");
 
 var listNum = 9; //define a number of displays on address page
-var maxBlocks = 11; //define a number of list block
+var maxBlocks = 20; //define a number of list block
 
 function listData(obj) {
   let len=obj.length;
@@ -75,6 +75,7 @@ function addressData(addrInfo, result, blockNum, page) {
   //Packet processing for acquired data, corresponding to page paging data
   let transData = format.spiltArray(result.map((val, index) => {
     return {
+      index:index+1,
       txhash: val.hash,
       age: val.timestamp,
       block: val.blockNumber,
@@ -129,6 +130,7 @@ function transData(transObj, blockNum) {
   }
 }
 
+exports.maxBlocks = maxBlocks;
 exports.listData = listData;
 exports.blockData = blockData;
 exports.addressData = addressData;

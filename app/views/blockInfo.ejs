@@ -4,7 +4,7 @@
     <li>
       <img class="ico-img" src="/img/ico.png" alt="">
     </li>
-    <li><b>OVERVIEW FOR BLOCK</b> <span>#346732</span></li>
+    <li><b>OVERVIEW FOR BLOCK</b> <span>#<%=formatData["Height"]%></span></li>
   </ul>
   <ul class="floatRight com-title">
     <li>
@@ -14,9 +14,9 @@
       <% for(var i in breadcrumbs){ %>
         <% if(i==="OVERVIEW FOR BLOCK"){ %>
           -
-          <%}%>
-            <a class="color-blue" href=<%=breadcrumbs[i]%>><%=i %></a>
-            <% } %>
+        <%}%>
+        <a class="color-blue" href=<%=breadcrumbs[i]%>><%=i %></a>
+      <% } %>
     </li>
   </ul>
 </div>
@@ -28,7 +28,7 @@
         <%if(i==="Height"){%>
           <tr>
             <td><%=i%></td>
-            <td><span class="last-ico"></span><%=formatData[i]%><span class="next-ico"></td>
+            <td><a href="<%=formatData[i]-1%>" class="last-ico" title="previous"></a><%=formatData[i]%><a href="<%=formatData[i]+1%>" class="next-ico" title="next"></a></td>
           </tr>
         <%} else{%>
           <tr>

@@ -51,7 +51,7 @@
     <tbody>
       <% for(var i=0;i<transactionData.length;i++) {%>
         <tr>
-          <td><%=i+1%></td>
+          <td><%=transactionData[i].index%></td>
           <td><a href="/block/trans/<%= transactionData[i].txhash %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].txhash.substr(0,18)+'...'%></a></td>
           <td><%=transactionData[i].age%></td>
           <td><%=transactionData[i].block%></td>

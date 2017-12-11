@@ -1,20 +1,32 @@
 <% layout('index') -%>
-<ul class="com-title">
-  <li>
-    <img class="ico-img" src="/img/ico.png" alt="">
-  </li>
-  <li>
-    <% for(var i in breadcrumbs){ %>
-      <% if(i==="OVERVIEW FOR BLOCK"||i==="TRANSACTIONS"){ %>
-        -
-        <%}%>
-          <a class="color-blue" href=<%=breadcrumbs[i]%>><%=i %></a>
-          <% } %>
-  </li>
-</ul>
+<div class="con-titBox">
+  <ul class="floatLeft com-titLeft">
+    <li>
+      <img class="ico-img" src="/img/ico.png" alt="">
+    </li>
+    <li>
+      <b>OVERVIEW FOR BLOCK</b>
+      <span>#397619</span>
+    </li>
+  </ul>
+  <ul class="floatRight com-title">
+    <li>
+      <img class="ico-img" src="/img/ico.png" alt="">
+    </li>
+    <li>
+      <% for(var i in breadcrumbs){ %>
+        <% if(i==="OVERVIEW FOR BLOCK"||i==="TRANSACTIONS"){ %>
+          -
+          <%}%>
+            <a class="color-blue" href=<%=breadcrumbs[i]%>><%=i %></a>
+            <% } %>
+    </li>
+  </ul>
+</div>
+
 <article class="blockInfo-box">
   <table class="blockInfo-table" border="0" cellspacing="0" cellpadding="0">
-    <caption class="blockInfo-title">Transaction information</caption>
+    <caption class="blockInfo-title"><span class="bt-borLef"></span>Transaction information</caption>
     <tbody>
       <% for(var i in transInfo) {%>
         <tr>

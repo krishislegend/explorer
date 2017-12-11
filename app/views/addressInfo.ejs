@@ -1,17 +1,27 @@
 <% layout('index') -%>
-<ul class="com-title">
-  <li>
-    <img class="ico-img" src="/img/ico.png" alt="">
-  </li>
-  <li>
-    <% for(var i in breadcrumbs){ %>
-      <% if(i==="OVERVIEW FOR BLOCK"||i==="ADDRESS"){ %>
-        -
-      <%}%>
-          <a class="color-blue" href=<%=breadcrumbs[i]%>><%=i %></a>
-    <% } %>
-  </li>
-</ul>
+<div class="con-titBox">
+  <ul class="floatLeft com-titLeft">
+    <li>
+      <img class="ico-img" src="/img/ico.png" alt="">
+    </li>
+    <li>
+      <b>TRANSACTIONS</b>
+    </li>
+  </ul>
+  <ul class="com-title floatRight">
+    <li>
+      <img class="ico-img" src="/img/ico.png" alt="">
+    </li>
+    <li>
+      <% for(var i in breadcrumbs){ %>
+        <% if(i==="OVERVIEW FOR BLOCK"||i==="ADDRESS"){ %>
+          -
+        <%}%>
+            <a class="color-blue" href=<%=breadcrumbs[i]%>><%=i %></a>
+      <% } %>
+    </li>
+  </ul>
+</div>
 <article class="blockInfo-box addr-table">
   <div class="balCont">
     <dl class="floatLeft balanceBox">
@@ -36,7 +46,7 @@
   </div>
   <table class="com-table" border="0" cellspacing="0" cellpadding="0">
     <thead>
-      <tr>
+      <tr class="table-tr">
         <th>No</th>
         <th>TxHash</th>
         <th>Age</th>

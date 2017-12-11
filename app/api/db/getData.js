@@ -94,7 +94,7 @@ function addressData(addrInfo, result, blockNum, page) {
   var transactionData = transData[currPage - 1];
   return {
     breadcrumbs: {
-      "HOME BLOCKS": "/",
+      "HOME": "/",
       "OVERVIEW FOR BLOCK": `/block/${blockNum}`,
       "ADDRESS": "javascript:return false;"
     },

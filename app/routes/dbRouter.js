@@ -9,7 +9,7 @@ let {maxBlocks,listData,blockData,addressData,transData} = require('../api/db/ge
 //breadcrumbs
 const bc = {
   breadcrumbs: {
-    "BLOCKS": "/"
+    "HOME": "/"
   }
 };
 
@@ -39,25 +39,27 @@ router.get('/block/:blockNum', (req, res, next) => {
   //Get Informations about some block
   Wanblock.find({ number: { $gte: request } }) .sort({ number: 1 }) .limit(2).exec((err, result, res) => {
       if (err) {
-        response.render('error', bc);
+        response.render('error');
         return;
       }
-      if (result.length === 0) {
+      if (result.length === 0||result[0].number!==parseInt(request)) {
         response.render('notfound', bc);
         return;
       }
       let bool=(result.length>1);
       let resultBlock = result[0];
+      console.log(result);
       //Get all the transaction Info about this block
       Wantx.find({
         blockNumber: request
       }, (err, result, res) => {
         if (err) {
-          response.render('error', bc);
+          response.render('error');
           return;
         }
         obj = blockData(resultBlock, result);
-        obj.next=bool?`${obj.formatData.Height+1}`:"javascript:return false;";
+        obj.next=bool?`/block/${obj.formatData.Height+1}`:"javascript:return false;";
+        obj.method = 'db';
         response.render('blockInfo', obj);
       })
   })
@@ -74,7 +76,7 @@ router.get('/block/addr/:addrHash', (req, res, next) => {
     a_id: req.params.addrHash
   }, (err, result, res) => {
     if (err) {
-      response.render('error', bc);
+      response.render('error');
       return ;
     }
     if(result.length === 0){
@@ -91,7 +93,7 @@ router.get('/block/addr/:addrHash', (req, res, next) => {
       }
     }, (err, result, res) => {
       if (err) {
-        response.render('error', bc);
+        response.render('error');
         return ;
       }
       obj = addressData(addrInfo, result, req.query.bnum,req.query.page);
@@ -110,7 +112,7 @@ router.get('/block/trans/:transHash', (req, res, next) => {
     hash: req.params.transHash
   }, (err, result, res) => {
     if (err) {
-      response.render('error', bc);
+      response.render('error');
       return ;
     }
     if(result.length === 0){
@@ -118,6 +120,7 @@ router.get('/block/trans/:transHash', (req, res, next) => {
       return;
     }
     obj = transData(result[0], req.query.bnum);
+    obj.method = 'db';
     response.render('transactionInfo', obj);
   });
 });

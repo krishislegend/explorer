@@ -31,7 +31,11 @@
         <tr>
           <%if(i==="From"||i==="To"){%>
             <td><%=i%></td>
-            <td><a href="/block/addr/<%= transInfo[i] %>?bnum=<%=transInfo["Height"]%>"><%=transInfo[i]%></a></td>
+            <%if(method==='db'){%>
+              <td><a href="/block/addr/<%= transInfo[i] %>?bnum=<%=transInfo["Height"]%>"><%=transInfo[i]%></a></td>
+            <%}else{%>
+              <td><span><%=transInfo[i]%></span></td>
+            <%}%>
           <%} else{%>
             <td><%=i%></td>
             <td><%=transInfo[i]%></td>

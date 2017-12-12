@@ -28,7 +28,7 @@
         <%if(i==="Height"){%>
           <tr>
             <td><%=i%></td>
-            <td><a href="<%=formatData[i]-1%>" class="last-ico" title="previous"></a><%=formatData[i]%><a href="<%=next%>" class="next-ico" title="next"></a></td>
+            <td><a href="/block/<%=formatData[i]-1%>" class="last-ico" title="previous"></a><%=formatData[i]%><a href="<%=next%>" class="next-ico" title="next"></a></td>
           </tr>
         <%} else{%>
           <tr>
@@ -62,8 +62,13 @@
           <td><a href="/block/trans/<%= transactionData[i].txhash %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].txhash.substr(0,18)+'...'%></a></td>
           <td><%=transactionData[i].age%></td>
           <td><%=transactionData[i].block%></td>
-          <td><a href="/block/addr/<%= transactionData[i].from %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].from.substr(0,18)+'...'%></a></td>
-          <td><a href="/block/addr/<%= transactionData[i].to %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].to.substr(0,18)+'...'%></a></td>
+          <%if(method==='db'){%>
+            <td><a href="/block/addr/<%= transactionData[i].from %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].from.substr(0,18)+'...'%></a></td>
+            <td><a href="/block/addr/<%= transactionData[i].to %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].to.substr(0,18)+'...'%></a></td>
+          <%}else{%>
+            <td><span><%=transactionData[i].from.substr(0,18)+'...'%></span></td>
+            <td><span><%=transactionData[i].to.substr(0,18)+'...'%></span></td>
+          <%}%>
           <td><%=transactionData[i].value%></td>
           <td><%=transactionData[i].type%></td>
         </tr>

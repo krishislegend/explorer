@@ -1,5 +1,5 @@
 const Web3 = require("web3");
-const maxBlocks = 11; //define a number of query block
+const maxBlocks = 20; //define a number of query block
 const format=require("../../public/js/common.js");
 
 //Get information about the current block list，and format the data

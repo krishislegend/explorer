@@ -37,30 +37,30 @@ router.get('/block/:blockNum', (req, res, next) => {
     obj;
   let request = req.params.blockNum;
   //Get Informations about some block
-  Wanblock.find({
-    number: request
-  }, (err, result, res) => {
-    if (err) {
-      response.render('error', bc);
-      return ;
-    }
-    if(result.length === 0){
-        response.render('notfound', bc);
-        return;
-    }
-    let resultBlock = result[0];
-    //Get all the transaction Info about this block
-    Wantx.find({
-      blockNumber: request
-    }, (err, result, res) => {
+  Wanblock.find({ number: { $gte: request } }) .sort({ number: 1 }) .limit(2).exec((err, result, res) => {
       if (err) {
         response.render('error', bc);
-        return ;
+        return;
       }
-      obj = blockData(resultBlock, result);
-      response.render('blockInfo', obj);
-    })
-  });
+      if (result.length === 0) {
+        response.render('notfound', bc);
+        return;
+      }
+      let bool=(result.length>1);
+      let resultBlock = result[0];
+      //Get all the transaction Info about this block
+      Wantx.find({
+        blockNumber: request
+      }, (err, result, res) => {
+        if (err) {
+          response.render('error', bc);
+          return;
+        }
+        obj = blockData(resultBlock, result);
+        obj.next=bool?`${obj.formatData.Height+1}`:"javascript:return false;";
+        response.render('blockInfo', obj);
+      })
+  })
 });
 
 router.get('/block/addr/:addrHash', (req, res, next) => {

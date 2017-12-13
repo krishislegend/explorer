@@ -48,7 +48,6 @@ router.get('/block/:blockNum', (req, res, next) => {
       }
       let bool=(result.length>1);
       let resultBlock = result[0];
-      console.log(result);
       //Get all the transaction Info about this block
       Wantx.find({
         blockNumber: request

@@ -79,7 +79,7 @@ tbody>tr td a:hover{ text-decoration: underline;}
 .table-tr{ 	height: 60px; box-shadow: 0px 6px 8px 0px rgba(15, 104, 170, 0.06); border-radius: 3px;}
 .table-tr th{ border-top: solid 1px #f1f3f8!important; background-color: #ffffff!important;}
 .table-ico1{ width: 13px; height: 11px; background: url(/img/icon_tab.png) no-repeat -134px  -5px; margin-right: 10px; display: inline-block; background-size: 381px 27px;}
-.table-ico2{ width: 13px; height: 13px; background: url(/img/icon_tab.png) no-repeat -157px -5px; margin-right: 10px; display: inline-block; background-size: 381px 27px;}
+.table-ico2{ width: 14px; height: 13px; background: url(/img/icon_tab.png) no-repeat -157px -5px; margin-right: 10px; display: inline-block; background-size: 381px 27px;}
 .table-ico3{ width: 12px; height: 12px; background: url(/img/icon_tab.png) no-repeat -66px -5px; margin-right: 10px; display: inline-block; background-size: 381px 27px;}
 .table-ico4{ width: 12px; height: 13px; background: url(/img/icon_tab.png) no-repeat -44px  -5px; margin-right: 10px; display: inline-block; background-size: 381px 27px;}
 .table-ico5{ width: 14px; height: 14px; background: url(/img/icon_tab.png) no-repeat -180px -5px; margin-right: 10px; display: inline-block; background-size: 381px 27px;}

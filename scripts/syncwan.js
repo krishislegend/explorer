@@ -9,7 +9,6 @@ var mongoose = require('mongoose'),
     lib = require('../lib/explorerwan'),
     fs = require('fs');
 
-console.time("synctime");
 var count = 1;
 var block_num_db = -1;
 var mode = 'update';
@@ -21,17 +20,19 @@ var eth_node_url = 'http://localhost:8545'; // for local host mode
 console.log("eth_node_url: " + eth_node_url);
 web3.setProvider(new web3.providers.HttpProvider(eth_node_url));
 
+
+
 // displays usage and exits
 function usage() {
     console.log('Usage: node scripts/sync.js count startNumber');
-    console.log('  count: number of records to update');
-    console.log('  startNumber: starting block number to update from database');
+    console.log('count: number of records to update');
+    console.log('startNumber: starting block number to update from database');
     console.log('');
     process.exit(0);
 }
 
 // check options
-if (process.argv.length < 3) {
+if (process.argv.length < 2) {
     usage();
 }
 var count_in = process.argv[2];
@@ -39,19 +40,19 @@ if (isNaN(count_in)) {
    usage();
 }
 count = parseInt(count_in);
-//console.log("count="+count);
+console.log("count="+count);
 
 if (process.argv.length >3) {
-console.log("start=");
-   var startNumber_in = process.argv[3];
-   if (isNaN(startNumber_in)) {
-      usage();
+var startNumber_in = process.argv[3];
+if (isNaN(startNumber_in)) {
+   usage();
    }
 block_num_db = parseInt(startNumber_in);
 }
 
 console.log("count="+count+", start Block num="+block_num_db);
 // return;
+
 
 function create_lock(cb) {
     if (database == 'index') {
@@ -68,6 +69,8 @@ function create_lock(cb) {
         return cb();
     }
 }
+
+sync_main();
 
 function remove_lock(cb) {
     if (database == 'index') {
@@ -87,7 +90,7 @@ function remove_lock(cb) {
 
 function is_locked(cb) {
     if (database == 'index') {
-        var fname = '/tmp/' + database + '.pid';
+        var fname = './tmp/' + database + '.pid';
         fs.exists(fname, function(exists) {
             if (exists) {
                 console.log("is_lock exists:" + fname);
@@ -104,76 +107,92 @@ function is_locked(cb) {
 
 function exit() {
     console.log("disconnect");
-    console.timeEnd("synctime");
+    console.timeEnd("synctime-perloop");
+    console.log("Wait for next run...");
+    block_num_db = -1;
+    var datetime = new Date();
+    console.log(datetime);
     remove_lock(function() {
-        mongoose.disconnect();
-        process.exit(0);
+    mongoose.disconnect();
+    setTimeout(function() {
+    sync_main();
+	}, 20000);
+    // process.exit(0);
     });
 }
 
+function sync_main() {
 var dbString = 'mongodb://' + settings.dbsettings.user;
 dbString = dbString + ':' + settings.dbsettings.password;
 dbString = dbString + '@' + settings.dbsettings.address;
 dbString = dbString + ':' + settings.dbsettings.port;
 dbString = dbString + '/' + settings.dbsettings.database;
 console.log(dbString);
+console.time("synctime-perloop");
 is_locked(function(exists) {
     if (exists) {
         console.log("Script already running..");
         process.exit(0);
     } else {
-      create_lock(function() {
-  console.log("script launched with pid: " + process.pid);
-  mongoose.connect(dbString, function(err) {
-    if (err) {
-      console.log('Unable to connect to database');
-      console.log('Aborting');
-      exit();
-    } else {
-      //WZ
-      console.log('able to connect to database');
-      web3.eth.getBlockNumber(function(error, block_num_node) {
-        if (error) {
-          console.error(error);
-          exit();
-        } else {
-          console.log(block_num_node);
-          db2.find_block_top(function(block_top_db) {
-            if (block_top_db) {
-              console.log(block_top_db);
-              //compare block numbers from db and node.  If different, update db
-              if (block_num_db < 0) {
-                block_num_db = block_top_db[0].number;
-              }
-              console.log("block num node:" + block_num_node);
-              if (block_num_db < block_num_node) {
-                // var count = 1;
-                lib.syncLoop(count, function(loop) {
-                  var i = loop.iteration();
-                  update_block_from_node(block_num_db + i + 1, function() {
-                    // update_block_from_node(299105, function() {
-                    console.log("return from node_call 2");
-                    loop.next();
-                  });
-                }, function() {
-                  console.log("Done with iteration");
-                  exit();
+        create_lock(function() {
+            console.log("script launched with pid: " + process.pid);
+            mongoose.connect(dbString, function(err) {
+                if (err) {
+                    console.log('Unable to connect to database');
+                    console.log('Aborting');
+                    exit();
+                } else {
+                    //WZ
+                    console.log('able to connect to database');
+                    web3.eth.getBlockNumber(function(error, block_num_node) {
+                        if (error) {
+                            console.error(error);
+                            exit();
+                        } else {
+                            console.log(block_num_node);
+                            db2.find_block_top(function(block_top_db) {
+                                if (block_top_db) {
+                                    console.log(block_top_db);
+                                    //compare block numbers from db and node.  If different, update db
+				    if(block_num_db < 1) {
+					if(block_top_db[0]) {
+                                    		block_num_db = block_top_db[0].number;
+					} else {
+                                    		block_num_db = -1;
+					}
+				    }
+                                    console.log("block num node:" + block_num_node);
+                                    if (block_num_db < block_num_node) {
+                                        // var count = 1;
+                                        lib.syncLoop(count, function(loop) {
+                                            var i = loop.iteration();
+                                            update_block_from_node(block_num_db+i+1, function() {
+                                                console.log("return from node_call 2");
+                                                loop.next();
+                                            });
+                                        }, function() {
+                                            console.log("Done with iteration");
+                                            exit();
 
-                });
+                                        });
 
-              }
-            }
+                                    } else {
+					console.log("Start number is larger than the block last number. exit");
+					exit();
+				}
+				}
 
-          });
-        }
-      })
+                            });
+                        }
+                    })
 
+                }
+                //WZ mongoose connect end
+            });
+        });
     }
-    //WZ mongoose connect end
-  });
 });
-    }
-});
+}
 
 function update_block_from_node(number, cb) {
     console.log("inside from_node 0");

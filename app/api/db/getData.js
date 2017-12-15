@@ -83,7 +83,7 @@ function addressData(addrInfo, result, blockNum, page) {
       block: val.blockNumber,
       from: val.from,
       to: val.to,
-      value: val.value + ' WAN',
+      value: web3.fromWei(val.value) + ' WAN',
       type: val.txtype,
       classFrom: val.from === addrTitle.address
         ? "tabOut"

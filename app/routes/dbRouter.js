@@ -86,11 +86,23 @@ router.get('/block/addr/:addrHash', (req, res, next) => {
     addrInfo.txs.forEach((val, index) => {
       txh.push(val.txhash)
     });
+    // Wantx.find({
+    //   hash: {
+    //     $in: txh
+    //   }
+    // }, (err, result, res) => {
+    //   if (err) {
+    //     response.render('error');
+    //     return ;
+    //   }
+    //   obj = addressData(addrInfo, result, req.query.bnum,req.query.page);
+    //   response.render('addressInfo', obj);
+    // });
     Wantx.find({
       hash: {
         $in: txh
       }
-    }, (err, result, res) => {
+    }).sort({number:-1}).exec((err, result, res) => {
       if (err) {
         response.render('error');
         return ;

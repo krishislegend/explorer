@@ -13,7 +13,14 @@ const options = require('../data/dbInfo.js').options;
     "port" : port
   }
 */
-mongoose.connect('mongodb://localhost/explorerdb', options)
+mongoose.connect('mongodb://localhost/explorerdb', {
+  useMongoClient: true,
+  "user": "wanchain",
+  "password": 123456,
+  "database": "explorerdb",
+  "address" : "localhost",
+  "port" : 27017
+})
 
 var db = mongoose.connection;
 db.on('error', (callback) => {

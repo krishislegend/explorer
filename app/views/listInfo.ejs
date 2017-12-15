@@ -39,23 +39,21 @@
       <table class="com-table" border="0" cellspacing="0" cellpadding="0">
         <thead>
           <tr class="table-tr">
-              <th width="10%">No</th>
               <th width="15%"><em class="table-ico1"></em>Height</th>
               <th width="25%"><em class="table-ico2"></em>Age</th>
               <th width="18%"><em class="table-ico3"></em>Txn</th>
               <th width="18%"><em class="table-ico4"></em>Gas Used</th>
-              <th width="14%"><em class="table-ico5"></em>Size</th>
+              <th width="14%"><em class="table-ico5"></em>Size(byte)</th>
           </tr>
         </thead>
         <tbody>
           <% for(var i=0;i<blocks.length;i++){ %>
             <tr>
-              <td><%= i+1 %></td>
               <td><a href="/block/<%= blocks[i].height %>"><%= blocks[i].height %></a></td>
               <td><%= blocks[i].age %></td>
               <td><%= blocks[i].txn %></td>
               <td><%= blocks[i].gasUsed %></td>
-              <td><%= blocks[i].size + ' bytes' %></td>
+              <td><%= blocks[i].size %></td>
             </tr>
           <% } %>
         </tbody>

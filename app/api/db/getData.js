@@ -1,8 +1,10 @@
 const Wanblock = require('../../../models/wanblock');
 const format = require("../../public/js/common.js");
-
+var Web3 = require("web3");
 var listNum = 9; //define a number of displays on address page
 var maxBlocks = 20; //define a number of list block
+
+var web3=new Web3();
 
 function listData(obj) {
   let len=obj.length;
@@ -39,8 +41,8 @@ function blockData(block, result) {
     Size: block.size + ' bytes',
     "Gas Used": format.formatNum(block.gasUsed),
     "Gas Limit": format.formatNum(block.gasLimit),
-    Nonce: block.nonce,
-    Data: "s1 (Hex:0x7331)"
+    Nonce: block.nonce
+    // Data: "s1 (Hex:0x7331)"
   };
   let transactionData = result.map((val, index) => {
     return {
@@ -49,7 +51,7 @@ function blockData(block, result) {
       block: val.blockNumber,
       from: val.from,
       to: val.to,
-      value: val.value + ' WAN',
+      value: web3.fromWei(val.value) + ' WAN',
       type: val.txtype
     }
   });
@@ -113,12 +115,12 @@ function transData(transObj, blockNum) {
     TimeStamp: format.timeConversion(transObj.timestamp) + format.getUTC(transObj.timestamp),
     From: transObj.from,
     To: transObj.to,
-    Value: transObj.value + ' WAN',
+    Value: web3.fromWei(transObj.value)+ ' WAN',
     "Gas Used": format.formatNum(transObj.gas),
-    "Gas Price": format.formatNum(transObj.gasPrice),
-    "Tx Fee": format.formatNum(transObj.gas * transObj.gasPrice),
-    Nonce: transObj.nonce,
-    "Input Data": "undefined"
+    "Gas Price": format.formatNum(transObj.gasPrice/1000000000)+' GWAN',
+    "Tx Fee": web3.fromWei(transObj.gas * transObj.gasPrice),
+    Nonce: transObj.nonce
+    // "Input Data": "undefined"
   };
   return {
     breadcrumbs: {

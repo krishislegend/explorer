@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var dbRouter = require('./dbRouter');
-const options = require('../data/dbInfo.js').options;
+// const options = require('../data/dbInfo.js').options;
 /*
   options={
     useMongoClient: true,

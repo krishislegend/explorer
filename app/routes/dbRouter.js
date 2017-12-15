@@ -90,7 +90,7 @@ router.get('/block/addr/:addrHash', (req, res, next) => {
       hash: {
         $in: txh
       }
-    }).sort({number:-1}).exec((err, result, res) => {
+    }).sort({blockNumber:-1}).exec((err, result, res) => {
       if (err) {
         response.render('error');
         return ;

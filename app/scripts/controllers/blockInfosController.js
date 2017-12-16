@@ -95,7 +95,7 @@ angular.module('ethExplorer')
 	      // temporarily remove private transaction part
 	      //var sim_trans_priv_type = Math.random() < 0.5 ? true:false;
 	      //var transaction_type_str = sim_trans_priv_type ? "(private transaction)" : "";
-	      var transaction_type_str = (result.Txtype==0x6 || result.to==0x6) ? "(private transaction)" : "";
+	      var transaction_type_str = (result.Txtype==0x6 || result.to==0x64) ? "(private transaction)" : "";
 	      var transaction_from = result.from;
 	      var addressUrl = "./#/address/"+result.from;
 	      //var transaction_from = sim_trans_priv_type ? "address list" : result.from;

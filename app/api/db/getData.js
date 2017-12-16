@@ -33,10 +33,11 @@ function listData(obj) {
 }
 
 function blockData(block, result) {
+  console.log(block)
   let formatData = {
     Height: block.number,
     TimeStamp: format.timeConversion(block.timestamp) + format.getUTC(block.timestamp * 1000),
-    Transactions: `${block.transactions.length} transactions in this block`,
+    Transactions: `${result.length} transactions in this block`,
     Hash: block.hash,
     Size: block.size + ' bytes',
     "Gas Used": format.formatNum(block.gasUsed),
@@ -79,7 +80,7 @@ function addressData(addrInfo, result, blockNum, page) {
     return {
       index:index+1,
       txhash: val.hash,
-      age: val.timestamp,
+      age: format.timeConversion(val.timestamp),
       block: val.blockNumber,
       from: val.from,
       to: val.to,
@@ -112,7 +113,7 @@ function transData(transObj, blockNum) {
   let transInfo = {
     TxHash: transObj.hash,
     Height: transObj.blockNumber,
-    TimeStamp: format.timeConversion(transObj.timestamp) + format.getUTC(transObj.timestamp),
+    TimeStamp: format.timeConversion(transObj.timestamp) + format.getUTC(transObj.timestamp*1000),
     From: transObj.from,
     To: transObj.to,
     Value: web3.fromWei(transObj.value)+ ' WAN',

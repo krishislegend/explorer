@@ -43,7 +43,7 @@ function timeConversion(t,bool=true) {
   let time;
   bool?time=Math.ceil((new Date().getTime() - t * 1000) / 60000):time=t;
   if(time<=60){
-    return time+'mins ago';
+    return time+' mins ago';
   }
   if(time<1440){
     return parseInt(time/60)+' hrs '+time%60+' mins ago';

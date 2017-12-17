@@ -73,4 +73,4 @@ var WanblockSchema = new Schema({
     id: false
 });
 
-module.exports = mongoose.model('Wanblock', WanblockSchema);
+module.exports = mongoose.model('wanblock', WanblockSchema);

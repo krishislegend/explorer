@@ -25,6 +25,9 @@ var WanTxSchema = new Schema({
     gasPrice: {
         type: String
     },
+    input: {
+        type: String
+    },
     timestamp: {
         type: Number,
         default: 0

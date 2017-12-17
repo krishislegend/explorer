@@ -115,7 +115,7 @@ function exit() {
     remove_lock(function() {
     mongoose.disconnect();
     setTimeout(function() {
-    sync_main();
+    sync_main();	
 	}, 20000);
     // process.exit(0);
     });

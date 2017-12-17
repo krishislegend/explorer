@@ -2,7 +2,7 @@ const Web3 = require("web3");
 const maxBlocks = 20; //define a number of query block
 const format=require("../../public/js/common.js");
 
-//Get information about the current block list，and format the data
+//Get information about the current block list and format the data
 function listData(obj, maxBlocks) {
   let blockNum = parseInt(obj.eth.blockNumber, 10);
   if (maxBlocks > blockNum) {
@@ -43,6 +43,7 @@ function blockData(obj, blockNum) {
     Data: "s1 (Hex:0x7331)"
   };
   let transactionData=info.transactions.map((val,index)=>{
+    var privacy_type = (val.Txtype==0x6 || val.to==0x64) ? "private" : "public"; // mark up private transaction 
     return {
       txhash:val.hash,
       age: format.timeConversion(info.timestamp),
@@ -50,7 +51,7 @@ function blockData(obj, blockNum) {
       from:val.from,
       to:val.to,
       value:obj.fromWei(val.value,'ether')+' WAN',
-      type:val.type
+      type:privacy_type
     }
   });
   return {

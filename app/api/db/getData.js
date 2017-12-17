@@ -73,7 +73,7 @@ function addressData(addrInfo, result, blockNum, page) {
   let addrTitle = {
     address: addrInfo.a_id,
     "wan balance": addrInfo.balance,
-    "no of trans": addrInfo.received - addrInfo.sent + ' txn'
+    "no of trans": addrInfo.txs.length
   };
   //Packet processing for acquired data, corresponding to page paging data
   let transData = format.spiltArray(result.map((val, index) => {

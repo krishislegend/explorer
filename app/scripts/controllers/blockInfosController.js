@@ -91,15 +91,13 @@ angular.module('ethExplorer')
           for (var blockIdx = 0; blockIdx < txCount; blockIdx++) {
             web3.eth.getTransactionFromBlock($scope.blockId, blockIdx, function(error, result) {
 
-	      // JGu: from web3 - boolean result.trans_priv_type
-	      // temporarily remove private transaction part
-	      //var sim_trans_priv_type = Math.random() < 0.5 ? true:false;
-	      //var transaction_type_str = sim_trans_priv_type ? "(private transaction)" : "";
-	      var transaction_type_str = (result.Txtype==0x6 || result.to==0x64) ? "(private transaction)" : "";
+	      // from web3 - learn about "txType" and "to"
+	      var transaction_type_str = (result.txType==0x6 || result.to==0x64) ? "(private transaction)" : "";
+	      //var transaction_type_str = result.txType;
+	      //if (result.Txtype==0x6) transaction_type_str += " private Txtype 0x6";
+	      //if (result.to==0x64) transaction_type_str += " private to 0x64";
 	      var transaction_from = result.from;
 	      var addressUrl = "./#/address/"+result.from;
-	      //var transaction_from = sim_trans_priv_type ? "address list" : result.from;
-              //var addressUrl = sim_trans_priv_type ? "./#/addressList/"+result.hash : "./#/address/"+result.from;
 	      
               var transaction = {
                 id: result.hash,

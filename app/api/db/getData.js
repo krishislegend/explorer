@@ -72,7 +72,7 @@ function addressData(addrInfo, result, blockNum, page) {
   var currPage = page || 1;
   let addrTitle = {
     address: addrInfo.a_id,
-    "wan balance": addrInfo.balance,
+    "wan balance": web3.fromWei(addrInfo.balance),
     "no of trans": addrInfo.txs.length
   };
   //Packet processing for acquired data, corresponding to page paging data

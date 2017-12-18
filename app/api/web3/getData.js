@@ -28,7 +28,7 @@ function listData(obj, maxBlocks) {
   }, {blocks});
 }
 
-//Get information about the current block，and format the data
+//Get information about the current block and format the data
 function blockData(obj, blockNum) {
   let info = obj.eth.getBlock(blockNum,true);
   let formatData = {
@@ -43,7 +43,7 @@ function blockData(obj, blockNum) {
     Data: "s1 (Hex:0x7331)"
   };
   let transactionData=info.transactions.map((val,index)=>{
-    var privacy_type = (val.Txtype==0x6 || val.to==0x64) ? "private" : "public"; // mark up private transaction 
+    var privacy_type = (val.txType==0x6 || val.to==0x64) ? "private" : "public"; // mark up private transaction
     return {
       txhash:val.hash,
       age: format.timeConversion(info.timestamp),

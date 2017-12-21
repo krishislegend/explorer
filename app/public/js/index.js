@@ -3,7 +3,7 @@ window.onload = function() {
   var form = document.getElementById("search_bar");
   go.addEventListener('click', function(e) {
     var inp = document.getElementById('input_text');
-    var val = inp.value;
+    var val = trim(inp.value);
     if (/^[0-9]{1,10}$/.test(val)) {
       window.open("/block/" + val);
     } else if (val.length === 66 && /^[0][x]/.test(val)) {
@@ -24,11 +24,6 @@ function trigger(type, doc) {
   eventObj.initEvent(type, true, true);
   doc.dispatchEvent(eventObj);
 }
-function clickA(url) {
-  var el = document.createElement("a");
-  document.body.appendChild(el);
-  el.href = url;
-  el.target = '_new';
-  el.click();
-  document.body.removeChild(el);
+function trim(s){
+    return s.replace(/(^\s*)|(\s*$)/g, "");
 }

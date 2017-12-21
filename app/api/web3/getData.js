@@ -49,7 +49,7 @@ function blockData(obj, blockNum) {
       age: format.timeConversion(info.timestamp),
       block:blockNum,
       from:val.from,
-      to:val.to === null?"null":val.to,
+      to:val.to === null?"smart contract":val.to,
       value:obj.fromWei(val.value,'ether')+' WAN',
       type:privacy_type
     }
@@ -85,7 +85,7 @@ function transData(obj,trans,blockNum){
     Height:info.blockNumber,
     TimeStamp:format.timeConversion(timestamp/1000) + format.getUTC(timestamp),
     From:info.from,
-    To:info.to,
+    To:info.to === null?"smart contract":info.to,
     Value:obj.fromWei(info.value,'ether')+' WAN',
     "Gas Used":format.formatNum(info.gas),
     "Gas Price":format.formatNum(info.gasPrice/1000000000)+' GWAN',

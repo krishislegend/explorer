@@ -74,7 +74,11 @@
           <%if(transactionData[i].to===addrTitle.address){%>
             <td><%=transactionData[i].to.substr(0,18)+'...'%></td>
           <%}else{%>
-            <td><a href="/block/addr/<%= transactionData[i].to %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].to.substr(0,18)+'...'%></a></td>
+            <%if(transactionData[i].to==="smart contract"){%>
+              <td><span>smart contract</span></td>              
+            <%}else{%>
+              <td><a href="/block/addr/<%= transactionData[i].to %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].to.substr(0,18)+'...'%></a></td>
+            <%}%>
           <%}%>
           <td><%=transactionData[i].value%></td>
           <td><%=transactionData[i].type%></td>

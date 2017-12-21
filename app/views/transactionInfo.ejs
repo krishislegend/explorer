@@ -32,7 +32,11 @@
           <%if(i==="From"||i==="To"){%>
             <td><%=i%></td>
             <%if(method==='db'){%>
-              <td><a href="/block/addr/<%= transInfo[i] %>?bnum=<%=transInfo["Height"]%>"><%=transInfo[i]%></a></td>
+              <%if(transInfo[i]==="smart contract"){%>
+                <td><span>smart contract</span></td>
+              <%}else{%>
+                <td><a href="/block/addr/<%= transInfo[i] %>?bnum=<%=transInfo["Height"]%>"><%=transInfo[i]%></a></td>
+              <%}%>
             <%}else{%>
               <td><span><%=transInfo[i]%></span></td>
             <%}%>

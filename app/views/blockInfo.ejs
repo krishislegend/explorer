@@ -28,7 +28,11 @@
         <%if(i==="Height"){%>
           <tr>
             <td><%=i%></td>
-            <td><a href="/block/<%=formatData[i]-1%>" class="last-ico" title="previous"></a><%=formatData[i]%><a href="<%=next%>" class="next-ico" title="next"></a></td>
+            <%if(parseInt(formatData[i])===1){%>
+              <td><a class="last-ico" title="previous"></a><%=formatData[i]%><a href="<%=next%>" class="next-ico" title="next"></a></td>
+            <%}else{%>
+              <td><a href="/block/<%=formatData[i]-1%>" class="last-ico" title="previous"></a><%=formatData[i]%><a href="<%=next%>" class="next-ico" title="next"></a></td>
+            <%}%>
           </tr>
         <%} else{%>
           <tr>

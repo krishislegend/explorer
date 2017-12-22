@@ -114,10 +114,10 @@ function exit() {
     console.log(datetime);
     remove_lock(function() {
     mongoose.disconnect();
+    // process.exit(0); // comment this to make to loop
     setTimeout(function() {
     sync_main();	
 	}, 20000);
-    // process.exit(0);
     });
 }
 
@@ -202,7 +202,11 @@ function update_block_from_node(number, cb) {
         if (!error) {
             console.log(result);
             console.log(number);
-            db2.update_block(number, result, function(err, updateRes) {
+	    var balances = get_balance_from_block(result);
+	    console.log("Return from getBalance");
+            console.log(balances);
+            // console.log(balances["0xdb05642eabc8347ec78e21bdf0d906ba579d423a"]);
+            db2.update_block(number, result, balances, function(err, updateRes) {
                 if (!err) {
                     console.log("update completed");
                     return cb(updateRes);
@@ -211,10 +215,51 @@ function update_block_from_node(number, cb) {
                     return cb(err);
                 }
             });
-            //XXX return cb(result);
         } else {
             console.error(error);
             return cb(error);
         }
     })
 }
+
+//adding balance check
+function get_balance_from_block(block) {
+   console.log("in get_balance");
+   var Balance_one = function(address,amount){
+    this.address = address,
+    this.amount = amount.toString(10);
+    }
+   var balances_tx = [];
+   if(!block) return null;
+   if(block.transactions) {
+   var block_txs = block.transactions;
+   lib.syncLoop(block_txs.length, function(loop) {
+            var i = loop.iteration();
+	    console.log(block_txs[i]);
+	    console.log(block_txs[i].from);
+	    var balance_amount_from = web3.eth.getBalance(block_txs[i].from);
+	    // balances_tx.push(new Balance_one(block_txs[i].from, balance_amount_from));
+	    balances_tx[block_txs[i].from] = balance_amount_from.toString(10);
+	    // balances_tx.push(block_txs[i].from, balance_amount_from);
+	    if(block_txs[i].to) {
+	    var balance_amount_to = web3.eth.getBalance(block_txs[i].to);
+	    // balances_tx.push(new Balance_one(block_txs[i].to, balance_amount_to));
+	    // balances_tx.push(block_txs[i].to, balance_amount_to);
+	    balances_tx[block_txs[i].to] = balance_amount_to.toString(10);
+		}
+	    else {
+		block_txs[i].to = "smart contract";
+	    	balances_tx[block_txs[i].to] = "0";
+		}
+	    console.log(balances_tx);
+	   //  return balances_tx;
+        }, function() {
+	    // return balances_tx;
+            // return null; 
+        });
+	    return balances_tx;
+    }
+}
+
+   
+

@@ -61,7 +61,8 @@ router.get('/block/:blockNum', (req, res, next) => {
           return;
         }
         obj = blockData(resultBlock, result);
-        obj.next=bool?`/block/${obj.formatData.Height+1}`:"javascript:return false;";
+        obj.bool=bool;
+        // obj.next=bool?`/block/${obj.formatData.Height+1}`:"javascript:return false;";
         obj.method = 'db';
         response.render('blockInfo', obj);
       })

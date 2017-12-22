@@ -20,7 +20,8 @@ router.get('/block/:blockNum', (req, res, next) => {
     return;
   }
   var obj = require('../api/web3/getData')("blockData", req.params.blockNum);
-  obj.next = parseInt(obj.formatData.Height)+1;
+  // obj.next = parseInt(obj.formatData.Height)+1;
+  obj.bool = web3.eth.blockNumber !== parseInt(req.params.blockNum) ? true:false;
   obj.method = 'web3';
   res.render('blockInfo', obj);
 });

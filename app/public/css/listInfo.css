@@ -59,7 +59,7 @@ tbody>tr td a:hover{ text-decoration: underline;}
 /*hea-search*/
 .search-bar{ width: 487px; margin-top: 20px; display: inline-block;}
 .seacr-box{ width: 487px; height: 40px;position: relative; margin-right: 20px;}
-.sea-ico{outline: none; width: 15px; height: 15px; border: none; position: absolute; background: url(/img/icon_tab.png) no-repeat -253px -5px; background-size: 381px 27px; right: 13px; bottom: 12px; cursor: pointer;}
+.sea-ico{outline: none; width: 15px; height: 15px; border: none; position: absolute; background: url(/img/icon_tab.png) no-repeat -253px -5px; background-size: 381px 27px; right: 13px; bottom: 13px; cursor: pointer;}
 .sea-ico:hover{ background: url(/img/icon_tab.png) no-repeat -228px -5px; background-size: 381px 27px; cursor: pointer;}
 .sea-inp{ width: 487px; height: 34px; text-indent: 24px; border: 2px solid #e8ebf0; border-radius: 80px;}
 .sea-inp::-webkit-input-placeholder{ color:#c6cbd7;font-size:14px;letter-spacing: 1px;}

@@ -29,9 +29,13 @@
           <tr>
             <td><%=i%></td>
             <%if(parseInt(formatData[i])===1){%>
-              <td><a class="last-ico" title="previous"></a><%=formatData[i]%><a href="<%=next%>" class="next-ico" title="next"></a></td>
+              <td><a class="last-ico" title="No Previous Block"></a><%=formatData[i]%><a href="/block/<%=parseInt(formatData[i])+1%>" class="next-ico" title="Next Block"></a></td>
             <%}else{%>
-              <td><a href="/block/<%=formatData[i]-1%>" class="last-ico" title="previous"></a><%=formatData[i]%><a href="<%=next%>" class="next-ico" title="next"></a></td>
+              <%if(bool){%>
+                <td><a href="/block/<%=formatData[i]-1%>" class="last-ico" title="Previous Block"></a><%=formatData[i]%><a href="/block/<%=parseInt(formatData[i])+1%>" class="next-ico" title="Next Block"></a></td>
+              <%}else{%>
+                <td><a href="/block/<%=formatData[i]-1%>" class="last-ico" title="Previous Block"></a><%=formatData[i]%><a class="next-ico" title="You have reached the Latest Block"></a></td>
+              <%}%>
             <%}%>
           </tr>
         <%} else{%>

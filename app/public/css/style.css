@@ -42,7 +42,7 @@ tbody>tr td a:hover{ text-decoration: underline;}
 /*hea-search*/
 .search-bar{ margin-top: 20px;margin-right: 45px;}
 .seacr-box{ width: 330px; height: 35px; position: relative;}
-.sea-ico{ outline: none; width: 15px; height: 15px; border: none; position: absolute; background: url(/img/icon_tab.png) no-repeat -253px -5px; background-size: 381px 27px; right: -7px; bottom: 11px; cursor: pointer;}
+.sea-ico{ outline: none; width: 15px; height: 15px; border: none; position: absolute; background: url(/img/icon_tab.png) no-repeat -253px -5px; background-size: 381px 27px; right: -11px; bottom: 12px; cursor: pointer;}
 .sea-ico:hover{ background: url(/img/icon_tab.png) no-repeat -228px -5px; background-size: 381px 27px; cursor: pointer;}
 .sea-ico img{ width: 15px; height: 15px;}
 .sea-inp{ width: 330px; height: 30px; border: none; margin-left: 25px; background-color: #f2f4f8; border-radius: 80px; text-indent: 24px;}

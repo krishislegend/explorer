@@ -57,6 +57,10 @@ var WanblockSchema = new Schema({
     totalDifficulty: {
         type: Number
     },
+    txn: {
+        type: Number,
+        default: 0
+    },
     transactions: {
         type: Array,
         default: []

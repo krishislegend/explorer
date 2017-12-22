@@ -36,6 +36,10 @@ router.get('/block/:blockNum', (req, res, next) => {
   let response = res,
     obj;
   let request = req.params.blockNum;
+  if(request==="0"){
+    response.render('notfound',bc);
+    return;
+  }
   //Get Informations about some block
   Wanblock.find({ number: { $gte: request } }) .sort({ number: 1 }) .limit(2).exec((err, result, res) => {
       if (err) {

@@ -19,7 +19,7 @@ function listData(obj) {
     blocks.unshift({
       height: data.number,
       age: format.timeConversion(data.timestamp),
-      txn: data.transactions.length,
+      txn: data.txn,
       gasUsed: format.formatNum(data.gasUsed),
       size: data.size
     });
@@ -33,7 +33,6 @@ function listData(obj) {
 }
 
 function blockData(block, result) {
-  console.log(block)
   let formatData = {
     Height: block.number,
     TimeStamp: format.timeConversion(block.timestamp) + format.getUTC(block.timestamp * 1000),

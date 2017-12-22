@@ -39,8 +39,8 @@ function blockData(obj, blockNum) {
     Size: info.size + ' bytes',
     "Gas Used": format.formatNum(info.gasUsed),
     "Gas Limit": format.formatNum(info.gasLimit),
-    Nonce: info.nonce,
-    Data: "s1 (Hex:0x7331)"
+    Nonce: info.nonce
+    // Data: "s1 (Hex:0x7331)"
   };
   let transactionData=info.transactions.map((val,index)=>{
     var privacy_type = (val.txType==0x6 || val.to==0x64) ? "private" : "public"; // mark up private transaction
@@ -49,7 +49,7 @@ function blockData(obj, blockNum) {
       age: format.timeConversion(info.timestamp),
       block:blockNum,
       from:val.from,
-      to:val.to,
+      to:val.to === null?"smart contract":val.to,
       value:obj.fromWei(val.value,'ether')+' WAN',
       type:privacy_type
     }
@@ -85,13 +85,13 @@ function transData(obj,trans,blockNum){
     Height:info.blockNumber,
     TimeStamp:format.timeConversion(timestamp/1000) + format.getUTC(timestamp),
     From:info.from,
-    To:info.to,
+    To:info.to === null?"smart contract":info.to,
     Value:obj.fromWei(info.value,'ether')+' WAN',
     "Gas Used":format.formatNum(info.gas),
-    "Gas Price":format.formatNum(info.gasPrice),
-    "Tx Fee":format.formatNum(info.gas*info.gasPrice),
-    Nonce:info.nonce,
-    "Input Data":info.input.substr(0,10)
+    "Gas Price":format.formatNum(info.gasPrice/1000000000)+' GWAN',
+    "Tx Fee":web3.fromWei(info.gas*info.gasPrice),
+    Nonce:info.nonce
+    // "Input Data":info.input.substr(0,10)
   };
   return {
     breadcrumbs: {

@@ -15,6 +15,10 @@ router.get('/block/:blockNum', (req, res, next) => {
     res.render('notfound',bc);
     return;
   }
+  if(req.params.blockNum === "0"){
+    res.render('notfound',bc);
+    return;
+  }
   var obj = require('../api/web3/getData')("blockData", req.params.blockNum);
   obj.next = parseInt(obj.formatData.Height)+1;
   obj.method = 'web3';

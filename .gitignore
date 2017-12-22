@@ -29,4 +29,6 @@ coverage
 testLog
 *.sh
 *.bak
+*.crt
+*.pem
 *.node-xml*

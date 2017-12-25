@@ -88,7 +88,7 @@ function transData(obj,trans,blockNum){
     To:info.to === null?"smart contract":info.to,
     Value:obj.fromWei(info.value,'ether')+' WAN',
     "Gas Used":format.formatNum(info.gas),
-    "Gas Price":format.formatNum(info.gasPrice/1000000000)+' GWAN',
+    "Gas Price":format.formatNum(info.gasPrice/1000000000)+' Gwin',
     "Tx Fee":web3.fromWei(info.gas*info.gasPrice),
     Nonce:info.nonce
     // "Input Data":info.input.substr(0,10)

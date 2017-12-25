@@ -117,7 +117,7 @@ function transData(transObj, blockNum) {
     To: transObj.to,
     Value: web3.fromWei(transObj.value)+ ' WAN',
     "Gas Used": format.formatNum(transObj.gas),
-    "Gas Price": format.formatNum(transObj.gasPrice/1000000000)+' GWAN',
+    "Gas Price": format.formatNum(transObj.gasPrice/1000000000)+' Gwin',
     "Tx Fee": web3.fromWei(transObj.gas * transObj.gasPrice),
     Nonce: transObj.nonce
     // "Input Data": "undefined"

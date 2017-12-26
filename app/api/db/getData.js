@@ -1,10 +1,12 @@
 const Wanblock = require('../../../models/wanblock');
 const format = require("../../public/js/common.js");
+let {decodeInput} = require('../../public/js/handleInput')
 var Web3 = require("web3");
+var web3 = new Web3;
 var listNum = 9; //define a number of displays on address page
 var maxBlocks = 20; //define a number of list block
-
-var web3=new Web3();
+// let method = wanUtil.sha3('transfer(address,uint256)', 256).slice(0,4).toString('hex');
+web3.setProvider(new web3.providers.HttpProvider("http://localhost:8545"));
 
 function listData(obj) {
   let len=obj.length;
@@ -45,6 +47,7 @@ function blockData(block, result) {
     // Data: "s1 (Hex:0x7331)"
   };
   let transactionData = result.map((val, index) => {
+    val.to=val.createContract?"smart contract"+val.to:val.to;
     return {
       txhash: val.hash,
       age: format.timeConversion(val.timestamp),
@@ -72,10 +75,12 @@ function addressData(addrInfo, result, blockNum, page) {
   let addrTitle = {
     address: addrInfo.a_id,
     "wan balance": web3.fromWei(addrInfo.balance),
-    "no of trans": addrInfo.txs.length
+    "no of trans": addrInfo.txs.length,
+    isContract:!!addrInfo.contract
   };
   //Packet processing for acquired data, corresponding to page paging data
   let transData = format.spiltArray(result.map((val, index) => {
+    val.to=val.createContract?"smart contract"+val.to:val.to;
     return {
       index:index+1,
       txhash: val.hash,
@@ -109,6 +114,8 @@ function addressData(addrInfo, result, blockNum, page) {
 }
 
 function transData(transObj, blockNum) {
+  let tokenTrans=decodeInput(transObj.input,web3.fromWei);
+  console.log(transObj);
   let transInfo = {
     TxHash: transObj.hash,
     Height: transObj.blockNumber,
@@ -117,10 +124,10 @@ function transData(transObj, blockNum) {
     To: transObj.to,
     Value: web3.fromWei(transObj.value)+ ' WAN',
     "Gas Used": format.formatNum(transObj.gas),
-    "Gas Price": format.formatNum(transObj.gasPrice/1000000000)+' Gwin',
+    "Gas Price": format.formatNum(transObj.gasPrice/1000000000)+' Gwei',
     "Tx Fee": web3.fromWei(transObj.gas * transObj.gasPrice),
-    Nonce: transObj.nonce
-    // "Input Data": "undefined"
+    Nonce: transObj.nonce,
+    "Input Data": transObj.input
   };
   return {
     breadcrumbs: {
@@ -128,7 +135,9 @@ function transData(transObj, blockNum) {
       "OVERVIEW FOR BLOCK": `/block/${transObj.blockNumber}`,
       "TRANSACTIONS": "javascript:return false;"
     },
-    transInfo
+    transInfo,
+    tokenTrans,
+    transObj
   }
 }
 

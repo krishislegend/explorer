@@ -126,3 +126,6 @@ a[href^="javascript"]{ cursor: default; color:#929cb8; }
 /*notfound Page*/
 .notfound tbody>tr{height:500px;}
 .notMessage{margin-top:10px;color:#c6cbd7}
+/*contractInfo*/
+.contractInfo{display: inline-block;font-size: 12px;}
+.textareaInfo{font-size:small;background-color:#f7f8fc;width:580px;height:100px;padding:5px;}

@@ -39,7 +39,13 @@
     </div>
     <ul class="titleAddr floatRight">
       <li>
-        <span class="floatLeft addr-tit">Address :</span>
+        <span class="floatLeft addr-tit">
+          <%if(addrTitle.isContract){%>
+            Contract Address :
+          <%}else{%>
+            Address :
+          <%}%>
+        </span>
         <span class="addr-mess"><%=addrTitle.address%></span>
       </li>
     </ul>
@@ -71,15 +77,21 @@
             <td><a href="/block/addr/<%= transactionData[i].from %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].from.substr(0,18)+'...'%></a></td>
           <%}%>
           <td><span class="<%=transactionData[i].classFrom%>"><%=transactionData[i].outIn%></span></td>
-          <%if(transactionData[i].to===addrTitle.address){%>
-            <td><%=transactionData[i].to.substr(0,18)+'...'%></td>
-          <%}else{%>
-            <%if(transactionData[i].to==="smart contract"){%>
-              <td><span>smart contract</span></td>              
+          <td>
+            <%if(transactionData[i].to===addrTitle.address){%>
+              <%=transactionData[i].to.substr(0,18)+'...'%>
             <%}else{%>
-              <td><a href="/block/addr/<%= transactionData[i].to %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].to.substr(0,18)+'...'%></a></td>
+              <%if(transactionData[i].to.slice(0,2)==="sm"){%>
+                <%if(transactionData[i].to.slice(14)===addrTitle.address){%>
+                  <span>smart contract</span>
+                <%}else{%>
+                  <a href="/block/addr/<%= transactionData[i].to.slice(14) %>?bnum=<%=transactionData[i].block%>">smart contract</a>
+                <%}%>
+              <%}else{%>
+                <a href="/block/addr/<%= transactionData[i].to %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].to.substr(0,18)+'...'%></a>
+              <%}%>
             <%}%>
-          <%}%>
+          </td>
           <td><%=transactionData[i].value%></td>
           <td><%=transactionData[i].type%></td>
         </tr>

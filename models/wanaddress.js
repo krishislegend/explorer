@@ -23,6 +23,10 @@ var WanAddressSchema = new Schema({
         type: Number,
         default: 0
     },
+    contract: {
+      type: Boolean,
+      default: false
+    }
 }, {
     id: false
 });

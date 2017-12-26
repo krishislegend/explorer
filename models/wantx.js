@@ -18,6 +18,9 @@ var WanTxSchema = new Schema({
     to: {
         type: String
     },
+    createContract: {
+        type: Boolean
+    },
     gas: {
         type: Number,
         default: 0

@@ -29,18 +29,43 @@
     <tbody>
       <% for(var i in transInfo) {%>
         <tr>
-          <%if(i==="From"||i==="To"){%>
+          <%if((i==="From"||i==="To")&&method==="db"){%>
             <td><%=i%></td>
-            <%if(method==='db'){%>
-              <%if(transInfo[i]==="smart contract"){%>
-                <td><span>smart contract</span></td>
+            <td>
+              <%if(tokenTrans.length!==0&&i=="To"){%>
+                  <span>contract </span>
+                  <a href="/block/addr/<%= transInfo[i] %>?bnum=<%=transInfo["Height"]%>"><%=transInfo[i]%></a>
+                  <span>---</span>
+                  <div class="contractInfo">
+                    <span style="font-weight:550"><%=tokenTrans[1]%> TOKEN </span>
+                    Transfer From
+                    <a href="/block/addr/<%= transInfo["From"] %>?bnum=<%=transInfo["Height"]%>"><%=transInfo["From"].substr(0,18)+'...'%></a>
+                    <span>to<span>
+                    <a href="/block/addr/<%=tokenTrans[0]%>?bnum=<%=transInfo["Height"]%>"><%=tokenTrans[0].substr(0,18)+'...'%></a>
+                  </div>
+              <%}else if(transObj.createContract===true&&i=="To"){%>
+                Contract <a href="/block/addr/<%= transInfo[i] %>?bnum=<%=transInfo["Height"]%>"><%=transInfo[i]%></a> Created
               <%}else{%>
-                <td><a href="/block/addr/<%= transInfo[i] %>?bnum=<%=transInfo["Height"]%>"><%=transInfo[i]%></a></td>
+                <a href="/block/addr/<%= transInfo[i] %>?bnum=<%=transInfo["Height"]%>"><%=transInfo[i]%></a>
               <%}%>
-            <%}else{%>
-              <td><span><%=transInfo[i]%></span></td>
-            <%}%>
-          <%} else{%>
+            </td>
+          <%}else if(i==="Input Data"){%>
+            <td>Input Data</td>
+            <td>
+              <%if(tokenTrans.length!==0){%>
+<textarea readonly spellcheck="false" class="textareaInfo">
+Function: transfer(address _to, uint256 _value) ***
+
+Method: <%=tokenTrans[2][0]%>
+
+[0]:<%=tokenTrans[2][1]%>
+[1]:<%=tokenTrans[2][2]%>
+</textarea>
+              <%}else{%>
+                <textarea readonly spellcheck="false" class="textareaInfo"><%=transInfo[i]%></textarea>
+              <%}%>
+            </td>
+          <%}else{%>
             <td><%=i%></td>
             <td><%=transInfo[i]%></td>
           <%}%>

@@ -111,7 +111,7 @@ a[href^="javascript"]{ cursor: default; color:#929cb8; }
 .first:hover{background-color: #4b90f7;color:#fff;}
 .last:hover{background-color: #4b90f7;color:#fff;}
 .balCont{ width: 98%; display: inline-block;margin-bottom: -4px;}
-.balanceBox{height: 45px; padding:24px 37px 24px 20px; background-image: linear-gradient(135deg, #1189f8 0%, #00c6ff 100%); border-radius: 8px;}
+.balanceBox{height: 45px; padding:24px 37px 24px 20px; background-image: linear-gradient(135deg, #1189f8 0%, #00c6ff 100%); border-radius: 8px 0 0 0;}
 .balDt{ width: 39px; height: 45px;}
 .balDd{ margin-left: -6px;}
 .balImg{ width: 100%;}

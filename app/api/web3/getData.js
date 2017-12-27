@@ -49,7 +49,7 @@ function blockData(obj, blockNum) {
       age: format.timeConversion(info.timestamp),
       block:blockNum,
       from:val.from,
-      to:val.to === null?"smart contract":val.to,
+      to:val.to === null?"smart contract"+obj.eth.getTransactionReceipt(val.hash).contractAddress:val.to,
       value:obj.fromWei(val.value,'ether')+' WAN',
       type:privacy_type
     }
@@ -80,18 +80,19 @@ function addressData(obj,addr,blockNum) {
 function transData(obj,trans,blockNum){
   let info = obj.eth.getTransaction(trans);
   let timestamp=obj.eth.getBlock(blockNum).timestamp*1000;
+  console.log(obj.eth.getTransactionReceipt(trans));
   let transInfo={
     TxHash:trans,
     Height:info.blockNumber,
     TimeStamp:format.timeConversion(timestamp/1000) + format.getUTC(timestamp),
     From:info.from,
-    To:info.to === null?"smart contract":info.to,
+    To:info.to === null?"sm"+obj.eth.getTransactionReceipt(trans).contractAddress:info.to,
     Value:obj.fromWei(info.value,'ether')+' WAN',
     "Gas Used":format.formatNum(info.gas),
     "Gas Price":format.formatNum(info.gasPrice/1000000000)+' Gwei',
     "Tx Fee":web3.fromWei(info.gas*info.gasPrice),
-    Nonce:info.nonce
-    // "Input Data":info.input.substr(0,10)
+    Nonce:info.nonce,
+    "Input Data":info.input
   };
   return {
     breadcrumbs: {

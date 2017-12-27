@@ -72,18 +72,22 @@
           <td><%=transactionData[i].block%></td>
           <%if(method==='db'){%>
             <td><a href="/block/addr/<%= transactionData[i].from %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].from.substr(0,18)+'...'%></a></td>
-            <%if(transactionData[i].to.slice(0,2)==="sm"){%>
-              <td><a href="/block/addr/<%= transactionData[i].to.slice(14) %>?bnum=<%=transactionData[i].block%>">smart contract</a></td>
-            <%}else{%>
-              <td><a href="/block/addr/<%= transactionData[i].to %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].to.substr(0,18)+'...'%></a></td>
-            <%}%>
+            <td>
+              <%if(transactionData[i].to.slice(0,2)==="sm"){%>
+                <a href="/block/addr/<%= transactionData[i].to.slice(14) %>?bnum=<%=transactionData[i].block%>">smart contract</a>
+              <%}else{%>
+                <a href="/block/addr/<%= transactionData[i].to %>?bnum=<%=transactionData[i].block%>"><%=transactionData[i].to.substr(0,18)+'...'%></a>
+              <%}%>
+            </td>
           <%}else{%>
             <td><span><%=transactionData[i].from.substr(0,18)+'...'%></span></td>
-            <%if(transactionData[i].to==="smart contract"){%>
-              <td><span>smart contract</span></td>
-            <%}else{%>
-              <td><span><%=transactionData[i].to.substr(0,18)+'...'%></span></td>
-            <%}%>
+            <td>
+              <%if(transactionData[i].to.slice(0,2)==="sm"){%>
+                <span title="<%=transactionData[i].to.slice(14)%>">smart contract</span>
+              <%}else{%>
+                <span><%=transactionData[i].to.substr(0,18)+'...'%></span>
+              <%}%>
+            </td>
           <%}%>
           <td><%=transactionData[i].value%></td>
           <td><%=transactionData[i].type%></td>

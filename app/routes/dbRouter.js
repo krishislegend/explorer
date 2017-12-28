@@ -26,7 +26,6 @@ router.get('/', (req, res, next) => {
       return ;
     }
     obj = listData(result);
-    console.log(obj)
     response.render('listInfo', obj);
   });
 });

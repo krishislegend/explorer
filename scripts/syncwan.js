@@ -269,7 +269,7 @@ function is_contract_from_block(block) {
     return null;
   if (block.transactions) {
     let block_txs = block.transactions;
-    lib.syncLoop(block_txs.length, (loop) => {
+    lib.syncLoop(block_txs.length, (loop)=>{
       let i = loop.iteration();
       console.log(block_txs[i]);
       console.log(block_txs[i].to);
@@ -285,7 +285,8 @@ function is_contract_from_block(block) {
           bool
         ];
       }
-    }, () => {});
+      loop.next();
+    }, ()=>{});
     return isContract_tx;
   }
 }

@@ -4,7 +4,7 @@ var web3Router = require('./web3Router');
 const Wanblock = require('../../models/wanblock');
 const Wantx = require('../../models/wantx');
 const Wanaddress = require('../../models/wanaddress');
-let {maxBlocks,listData,blockData,addressData,transData} = require('../api/db/getData');
+let {blockLen,listData,blockData,addressData,transData} = require('../api/db/getData');
 
 //breadcrumbs
 const bc = {
@@ -20,11 +20,13 @@ router.get('/', (req, res, next) => {
   if (Wanblock.collection.conn._readyState !== 1) {
     next();
   };
-  Wanblock.find().sort({number:-1}).limit(maxBlocks).exec((err, result, res) => {
+  Wanblock.find().sort({number:-1}).limit(blockLen).exec((err, result, res) => {
     if (err || result.length === 0) {
+      response.render('notfound', bc);
       return ;
     }
     obj = listData(result);
+    console.log(obj)
     response.render('listInfo', obj);
   });
 });

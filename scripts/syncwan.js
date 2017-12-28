@@ -200,10 +200,13 @@ function update_block_from_node(number, cb) {
       console.log(result);
       console.log(number);
       var balances = get_balance_from_block(result);
-      console.log("Return from getBalance");
+      var isContracts = is_contract_from_block(result);
+      console.log("Return from getBalance:");
       console.log(balances);
+      console.log("Return from isContract:");
+      console.log(isContracts);
       // console.log(balances["0xdb05642eabc8347ec78e21bdf0d906ba579d423a"]);
-      db2.update_block(number, result, balances, function(err, updateRes) {
+      db2.update_block(number, result, balances,isContracts, function(err, updateRes) {
         if (!err) {
           console.log("update completed");
           return cb(updateRes);
@@ -255,5 +258,34 @@ function get_balance_from_block(block) {
       // return null;
     });
     return balances_tx;
+  }
+}
+
+//adding contract check
+function is_contract_from_block(block) {
+  console.log("in is_contract");
+  let isContract_tx = [];
+  if (!block)
+    return null;
+  if (block.transactions) {
+    let block_txs = block.transactions;
+    lib.syncLoop(block_txs.length, (loop) => {
+      let i = loop.iteration();
+      console.log(block_txs[i]);
+      console.log(block_txs[i].to);
+      if (block_txs[i].to === null) {
+        let contract_addr_to = web3.eth.getTransactionReceipt(block_txs[i].hash).contractAddress;
+        isContract_tx[block_txs[i].hash] = [contract_addr_to, true];
+      } else {
+        let bool = web3.eth.getCode(block_txs[i].to) === "0x"
+          ? false
+          : true;
+        isContract_tx[block_txs[i].hash] = [
+          block_txs[i].to,
+          bool
+        ];
+      }
+    }, () => {});
+    return isContract_tx;
   }
 }

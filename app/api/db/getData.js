@@ -4,11 +4,12 @@ let {decodeInput} = require('../../public/js/handleInput')
 var Web3 = require("web3");
 var web3 = new Web3;
 var listNum = 9; //define a number of displays on address page
-var maxBlocks = 20; //define a number of list block
+var blockLen = 20; //define a number of list block
 // let method = wanUtil.sha3('transfer(address,uint256)', 256).slice(0,4).toString('hex');
-web3.setProvider(new web3.providers.HttpProvider("http://localhost:8545"));
+// web3.setProvider(new web3.providers.HttpProvider("http://localhost:8545"));
 
 function listData(obj) {
+  let maxBlocks = blockLen;
   let len=obj.length;
   if (maxBlocks > len) {
     maxBlocks = len ;
@@ -141,7 +142,7 @@ function transData(transObj, blockNum) {
   }
 }
 
-exports.maxBlocks = maxBlocks;
+exports.blockLen = blockLen;
 exports.listData = listData;
 exports.blockData = blockData;
 exports.addressData = addressData;

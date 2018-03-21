@@ -1,9 +1,9 @@
 {
-  "name": "WancoinExplorer",
+  "name": "ZilliqaExplorer",
   "private": false,
   "version": "0.1.0",
-  "description": "A lightweight Wancoin block explorer",
-  "repository": "https://github.com/wanchain/explorer",
+  "description": "A lightweight Zilliqa block explorer",
+  "repository": "https://github.com/krishislegend/explorer",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.3.1",

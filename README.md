@@ -10,12 +10,6 @@ Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git "Git
 ### Prepare Zilliqa explorer
 Download [Nodejs and npm](https://docs.npmjs.com/getting-started/installing-node "Nodejs install") if you don't have them
 
-Clone the repo 
-'git clone https://github.com/wanchain/explorer.git'
-
-### Run in local mode
-### i.e. node.js web server, go_wanchain node server, and brower all run on the same host machine
-
 Then visit http://localhost:8000 in your browser of choice.
 
 Start explorer program on the same host 192.168.x.y.
